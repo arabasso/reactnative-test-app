@@ -1,19 +1,72 @@
 import React from "react";
 import { createTheme, ThemeMode, ThemeProvider } from "@rneui/themed";
-import { useColorScheme } from "react-native";
-import Home from "./screens/Home";
+import { useColorScheme, View } from "react-native";
+import Main from "./src/screens/Main";
+import * as Yup from 'yup';
+import { pt } from "yup-locale-pt";
 
-const theme = createTheme({
-  lightColors: {},
-  darkColors: {},
-});
+Yup.setLocale(pt);
 
-export default function App() {
+const App = () => {
   theme.mode = useColorScheme() as ThemeMode;
 
   return (
     <ThemeProvider theme={theme}>
-      <Home />
+      <Main />
     </ThemeProvider>
   );
 }
+
+export const errorMessageColor = '#e10';
+
+const theme = createTheme({
+  lightColors: {},
+  darkColors: {
+    background: '#252526',
+  },
+  components: {
+    Input: (props, theme) => ({
+      containerStyle: {
+        paddingHorizontal: 0,
+      },
+      inputContainerStyle: {
+        borderWidth: 1,
+        borderRadius: 3,
+        paddingHorizontal: 8,
+        backgroundColor: theme.colors.background,
+        borderColor: props.renderErrorMessage || (props.errorMessage != null && props.errorMessage.length > 0) ? errorMessageColor : theme.colors.black,
+      },
+      labelStyle: {
+        color: theme.colors.black,
+        paddingBottom: 3,
+      },
+      inputStyle: {
+        color: props.renderErrorMessage || (props.errorMessage != null && props.errorMessage.length > 0) ? errorMessageColor : theme.colors.black,
+      },
+      leftIconContainerStyle: {
+        paddingRight: props.leftIcon ? 8 : 0,
+      },
+      leftIcon: props.leftIcon ? { color: props.renderErrorMessage || (props.errorMessage != null && props.errorMessage.length > 0) ? errorMessageColor : theme.colors.black } : undefined,
+      errorStyle: {
+        padding: 0,
+        paddingVertical: 0,
+        paddingHorizontal: 0,
+        height: props.renderErrorMessage || (props.errorMessage != null && props.errorMessage.length > 0) ? 'auto' : 0,
+        color: props.renderErrorMessage || (props.errorMessage != null && props.errorMessage.length > 0) ? errorMessageColor : theme.colors.black,
+      }
+    }),
+    Button: (props, theme) => ({
+      containerStyle: {
+        paddingHorizontal: 0,
+        marginBottom: 10,
+      },
+      buttonStyle: {
+        borderRadius: 3,
+        padding: 10,
+      },
+      icon: props.icon ? { color: theme.mode === 'dark' ? theme.colors.black : theme.colors.white } : undefined
+    })
+  }
+});
+
+export default App;
