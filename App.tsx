@@ -17,6 +17,7 @@ const App = () => {
   );
 }
 
+export const iconType = 'font-awesome-5';
 export const errorMessageColor = '#e10';
 
 const theme = createTheme({
@@ -46,7 +47,7 @@ const theme = createTheme({
       leftIconContainerStyle: {
         paddingRight: props.leftIcon ? 8 : 0,
       },
-      leftIcon: props.leftIcon ? { color: props.renderErrorMessage || (props.errorMessage != null && props.errorMessage.length > 0) ? errorMessageColor : theme.colors.black } : undefined,
+      leftIcon: props.leftIcon ? { type: iconType, color: props.renderErrorMessage || (props.errorMessage != null && props.errorMessage.length > 0) ? errorMessageColor : theme.colors.black } : undefined,
       errorStyle: {
         padding: 0,
         paddingVertical: 0,
@@ -64,7 +65,7 @@ const theme = createTheme({
         borderRadius: 3,
         padding: 10,
       },
-      icon: props.icon ? { color: theme.mode === 'dark' ? theme.colors.black : theme.colors.white } : undefined
+      icon: props.icon ? { type: iconType, color: theme.mode === 'dark' ? theme.colors.black : theme.colors.white } : undefined
     })
   }
 });
