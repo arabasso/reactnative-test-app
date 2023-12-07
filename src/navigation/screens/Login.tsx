@@ -11,7 +11,7 @@ type FormDataProps = {
     password: string;
 };
 
-const Login = ({ navigation }: any) => {
+export default function Login ({ navigation }: any) {
     const styles = useStyles();
 
     const validationSchema = yup.object({
@@ -21,7 +21,7 @@ const Login = ({ navigation }: any) => {
 
     const { control, handleSubmit, formState: { errors }, } = useForm<FormDataProps>({ resolver: yupResolver(validationSchema), defaultValues: { username: '', password: '' } })
 
-    const onSubmit = (data: any) => {
+    function onSubmit (data: any) {
         navigation.navigate('Home', data);
     };
 
@@ -47,5 +47,3 @@ const useStyles = makeStyles((theme) => ({
         marginVertical: theme.spacing.lg,
     },
 }));
-
-export default Login;

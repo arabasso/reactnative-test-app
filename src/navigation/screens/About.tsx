@@ -1,14 +1,14 @@
 import React from "react";
 import { View } from "react-native";
-import { Button, makeStyles, Text } from "@rneui/themed";
+import { makeStyles, Text } from "@rneui/themed";
 
-export default function Home ({ navigation } : any) {
+export default function About ({ navigation } : any) {
     const styles = useStyles();
 
     return (
         <View style={styles.container}>
-            <Text h3>
-                Página Inicial
+            <Text style={styles.text}>
+                Exemplo de Sobre
             </Text>
         </View>
     )

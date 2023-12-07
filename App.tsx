@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React from "react";
 import { createTheme, ThemeMode, ThemeProvider } from "@rneui/themed";
 import { useColorScheme, View } from "react-native";
@@ -7,7 +8,7 @@ import { pt } from "yup-locale-pt";
 
 Yup.setLocale(pt);
 
-const App = () => {
+export default function App () {
   theme.mode = useColorScheme() as ThemeMode;
 
   return (
@@ -69,5 +70,3 @@ const theme = createTheme({
     })
   }
 });
-
-export default App;
