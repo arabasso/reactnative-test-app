@@ -35,6 +35,11 @@ const theme = createTheme({
     background: '#222',
   },
   components: {
+    Text: (props, theme) => ({
+      style: {
+        marginBottom: 5,
+      }
+    }),
     Input: (props, theme) => ({
       containerStyle: {
         paddingHorizontal: 0,

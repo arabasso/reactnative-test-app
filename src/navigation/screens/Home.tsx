@@ -2,39 +2,36 @@ import { useEffect, useState } from "react";
 import { View, FlatList, TouchableOpacity } from "react-native";
 import { makeStyles, Text, useTheme } from "@rneui/themed";
 import { Icon } from "@rneui/base";
+import { useNavigation } from "@react-navigation/native";
+import { ListRenderItemInfo } from "react-native";
 
-type Botao = {
+type HomeButton = {
     id: any;
     icon: any;
     text: string;
-    screen: string;
+    navigateTo: () => void | null;
 }
 
-export default function Home({ navigation }: any) {
+const buttonColumns = 3;
+
+export default function Home() {
     const { theme } = useTheme();
     const styles = useStyles();
+    const navigation = useNavigation();
 
-    const columns = 3;
-
-    const [botoes, setBotoes] = useState<Botao[]>([]);
+    const [botoes, setBotoes] = useState<HomeButton[]>([]);
     async function getBotoes() {
         let items = [
             {
                 id: 1,
                 icon: <Icon type="font-awesome-5" name="edit" style={{ marginBottom: 10 }} color={theme.colors.foreground} />,
                 text: 'Publicações',
-                screen: 'Posts'
-            },
-            {
-                id: 2,
-                icon: <Icon type="font-awesome-5" name="product-hunt" style={{ marginBottom: 10 }} color={theme.colors.foreground} />,
-                text: 'Produtos',
-                screen: 'Products'
+                navigateTo: () => navigation.navigate("PostsList")
             },
         ];
 
-        while (items.length % columns != 0) {
-            items.push({} as Botao);
+        while (items.length % buttonColumns != 0) {
+            items.push({} as HomeButton);
         }
 
         setBotoes(items);
@@ -42,26 +39,27 @@ export default function Home({ navigation }: any) {
 
     useEffect(() => { getBotoes() }, []);
 
+    function renderItem({ item }: ListRenderItemInfo<HomeButton>) {
+        return (
+            <View style={{ flex: 1, flexDirection: 'column', margin: 10 }}>
+                {!item.id ? <></> :
+                    (
+                        <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={item.navigateTo}>
+                            {item.icon}
+                            <Text style={{ color: theme.colors.foreground }}>{item.text}</Text>
+                        </TouchableOpacity>
+                    )
+                }
+            </View>
+        )
+    }
+
     return (
         <View style={styles.container}>
             <FlatList
                 data={botoes}
-                renderItem={({ item }) => (
-                    <View
-                        style={{
-                            flex: 1,
-                            flexDirection: 'column',
-                            margin: 10
-                        }}>
-                        {!item.id ? <Text></Text> :
-                            <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={() => navigation.navigate(item.screen)}>
-                                {item.icon}
-                                <Text style={{ color: theme.colors.foreground }}>{item.text}</Text>
-                            </TouchableOpacity>
-                        }
-                    </View>
-                )}
-                numColumns={columns}
+                renderItem={renderItem}
+                numColumns={buttonColumns}
                 keyExtractor={(item) => item.id}
             />
         </View>
