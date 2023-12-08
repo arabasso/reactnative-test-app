@@ -1,30 +1,38 @@
 import 'react-native-gesture-handler';
-import React from "react";
 import { createTheme, ThemeMode, ThemeProvider } from "@rneui/themed";
-import { useColorScheme, View } from "react-native";
-import Main from "./src/screens/Main";
+import { useColorScheme } from "react-native";
 import * as Yup from 'yup';
 import { pt } from "yup-locale-pt";
+import Routes from './src/navigation/routes';
 
 Yup.setLocale(pt);
 
-export default function App () {
+export default function App() {
   theme.mode = useColorScheme() as ThemeMode;
 
   return (
     <ThemeProvider theme={theme}>
-      <Main />
+      <Routes />
     </ThemeProvider>
   );
+}
+
+declare module '@rneui/themed' {
+  export interface Colors {
+    foreground: string;
+  }
 }
 
 export const iconType = 'font-awesome-5';
 export const errorMessageColor = '#e10';
 
 const theme = createTheme({
-  lightColors: {},
+  lightColors: {
+    foreground: '#fff',
+  },
   darkColors: {
-    background: '#252526',
+    foreground: '#fff',
+    background: '#222',
   },
   components: {
     Input: (props, theme) => ({
@@ -36,25 +44,25 @@ const theme = createTheme({
         borderRadius: 3,
         paddingHorizontal: 8,
         backgroundColor: theme.colors.background,
-        borderColor: props.renderErrorMessage || (props.errorMessage != null && props.errorMessage.length > 0) ? errorMessageColor : theme.colors.black,
+        borderColor: props.renderErrorMessage || !!props.errorMessage ? errorMessageColor : theme.colors.black,
       },
       labelStyle: {
         color: theme.colors.black,
         paddingBottom: 3,
       },
       inputStyle: {
-        color: props.renderErrorMessage || (props.errorMessage != null && props.errorMessage.length > 0) ? errorMessageColor : theme.colors.black,
+        color: props.renderErrorMessage || !!props.errorMessage ? errorMessageColor : theme.colors.black,
       },
       leftIconContainerStyle: {
         paddingRight: props.leftIcon ? 8 : 0,
       },
-      leftIcon: props.leftIcon ? { type: iconType, color: props.renderErrorMessage || (props.errorMessage != null && props.errorMessage.length > 0) ? errorMessageColor : theme.colors.black } : undefined,
+      leftIcon: props.leftIcon ? { type: iconType, color: props.renderErrorMessage || !!props.errorMessage ? errorMessageColor : theme.colors.black } : undefined,
       errorStyle: {
         padding: 0,
         paddingVertical: 0,
         paddingHorizontal: 0,
-        height: props.renderErrorMessage || (props.errorMessage != null && props.errorMessage.length > 0) ? 'auto' : 0,
-        color: props.renderErrorMessage || (props.errorMessage != null && props.errorMessage.length > 0) ? errorMessageColor : theme.colors.black,
+        height: props.renderErrorMessage || !!props.errorMessage ? 'auto' : 0,
+        color: props.renderErrorMessage || !!props.errorMessage ? errorMessageColor : theme.colors.black,
       }
     }),
     Button: (props, theme) => ({
