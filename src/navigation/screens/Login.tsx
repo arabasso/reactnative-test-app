@@ -40,7 +40,7 @@ export default function Login() {
 
         await authService.login(data.username, data.password).then(login => {
             setIsLoading(false);
-            
+
             setLogin(login);
             navigation.goBack();
         }).catch(err => {
@@ -58,11 +58,13 @@ export default function Login() {
 
     return (
         <View style={styles.container}>
-            <View style={{ margin: 10 }}>
-                <Overlay isVisible={isLoading} overlayStyle={{ backgroundColor: theme.colors.background, flexDirection: "row", alignItems: "center" }}>
+            <Overlay isVisible={isLoading} overlayStyle={{ backgroundColor: theme.colors.background }}>
+                <View style={{ margin: 10, flexDirection: "row", alignItems: "center" }}>
                     <Loading isLoading={isLoading} />
                     <Text style={{ marginLeft: 10 }}>Autenticando...</Text>
-                </Overlay>
+                </View>
+            </Overlay>
+            <View style={{ margin: 10 }}>
                 {!!errors.root?.message && <Text style={styles.error}>{errors.root?.message}</Text>}
                 <InputControl control={control} name="username" label="Usuário" autoCapitalize='none' leftIcon={{ name: 'user' }} errorMessage={errors.username?.message} />
                 <InputControl control={control} name="password" label="Senha" secureTextEntry={true} leftIcon={{ name: 'lock' }} errorMessage={errors.password?.message} />
