@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { View, FlatList, TouchableOpacity } from "react-native";
+import { View, FlatList, TouchableOpacity, ListRenderItemInfo } from "react-native";
 import { makeStyles, Text, useTheme } from "@rneui/themed";
 import { Icon } from "@rneui/base";
 import { useNavigation } from "@react-navigation/native";
-import { ListRenderItemInfo } from "react-native";
 
 type HomeButton = {
     id: any;

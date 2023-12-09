@@ -3,7 +3,7 @@ import { ScrollView, View } from "react-native";
 import { Badge, makeStyles, Text } from "@rneui/themed";
 import { useRoute } from "@react-navigation/native";
 
-import Loading from "../../../components/Loading";
+import Loading from "@components/Loading";
 
 export default function PostsDetails() {
     const styles = useStyles();

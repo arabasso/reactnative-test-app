@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { FlatList, ListRenderItemInfo, TouchableOpacity, View } from "react-native";
 import { makeStyles, Text, useTheme } from "@rneui/themed";
 import { Badge } from "@rneui/base";
-import Loading from "../../../components/Loading";
 import { useNavigation } from "@react-navigation/native";
+
+import Loading from "@components/Loading";
 
 const itemsPerPage = 30;
 

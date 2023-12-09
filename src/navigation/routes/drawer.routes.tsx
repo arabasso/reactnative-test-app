@@ -4,8 +4,8 @@ import { DrawerContentScrollView, DrawerItem, DrawerItemList, createDrawerNaviga
 import { Icon } from "@rneui/base";
 
 import StackRoutes from "./stack.routes";
-import Login from "../../navigation/screens/Login";
-import About from "../../navigation/screens/About";
+import Login from "@screens/Login";
+import About from "@screens/About";
 
 const Drawer = createDrawerNavigator();
 

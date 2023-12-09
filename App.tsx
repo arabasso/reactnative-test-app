@@ -4,7 +4,7 @@ import { useColorScheme } from "react-native";
 import * as Yup from 'yup';
 import { pt } from "yup-locale-pt";
 
-import Routes from './src/navigation/routes';
+import Routes from '@navigation/routes';
 
 Yup.setLocale(pt);
 

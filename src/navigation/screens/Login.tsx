@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Button, makeStyles } from '@rneui/themed';
 import { View } from 'react-native';
-import InputControl from '../../components/InputControl';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
+
+import InputControl from '@components/InputControl';
 
 type FormDataProps = {
     username: string;

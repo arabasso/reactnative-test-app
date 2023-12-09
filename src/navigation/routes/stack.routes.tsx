@@ -1,10 +1,10 @@
 import { useTheme } from "@rneui/themed";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Home from "../../navigation/screens/Home";
-import Login from "../../navigation/screens/Login";
-import PostsList from "../screens/Posts/List";
-import PostsDetails from "../screens/Posts/Details";
+import Home from "@screens/Home";
+import Login from "@screens/Login";
+import PostsList from "@screens/Posts/List";
+import PostsDetails from "@screens/Posts/Details";
 
 const Stack = createNativeStackNavigator();
 
