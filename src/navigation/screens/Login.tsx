@@ -1,29 +1,59 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Button, makeStyles } from '@rneui/themed';
 import { View } from 'react-native';
 import InputControl from '../../components/InputControl';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 type FormDataProps = {
     username: string;
     password: string;
 };
 
-export default function Login ({ navigation }: any) {
+export default function Login () {
     const styles = useStyles();
+    const navigation = useNavigation();
 
     const validationSchema = yup.object({
         username: yup.string().required().label('Usuário'),
         password: yup.string().required().min(3).label('Senha'),
     });
 
-    const { control, handleSubmit, formState: { errors }, } = useForm<FormDataProps>({ resolver: yupResolver(validationSchema), defaultValues: { username: '', password: '' } })
+    const { control, handleSubmit, formState: { errors }, setError, reset } = useForm<FormDataProps>({ resolver: yupResolver(validationSchema), defaultValues: { username: '', password: '' } })
 
-    function onSubmit (data: any) {
-        navigation.navigate('Home', data);
+    async function onSubmit (data: any) {
+        let isValid = true;
+        
+        if (data.username !== "arabasso") {
+            setError('username', {
+                type:'manual',
+                message: 'Usuário inválido'
+            });
+
+            isValid = false;
+        }
+        
+        if (data.password !== '123') {
+            setError('password', {
+                type:'manual',
+                message: 'Senha incorreta'
+            });
+
+            isValid = false;
+        }
+        
+        if (isValid) {
+            navigation.navigate('Home');
+        }
     };
+
+    function onFocus() {
+        reset({ username: '', password: '' });
+    }
+
+    useFocusEffect(useCallback(onFocus, []));
 
     return (
         <View style={styles.container}>
@@ -31,7 +61,7 @@ export default function Login ({ navigation }: any) {
                 <InputControl control={control} name="username" label="Usuário" autoCapitalize='none' leftIcon={{ name: 'user' }} errorMessage={errors.username?.message} />
                 <InputControl control={control} name="password" label="Senha" secureTextEntry={true} leftIcon={{ name: 'lock' }} errorMessage={errors.password?.message} />
                 <Button onPress={handleSubmit(onSubmit)} icon={{ name: 'sign-in-alt' }} title="Entrar" accessibilityLabel="Entrar" />
-                <Button buttonStyle={{ backgroundColor: '#ea0' }} onPress={() => navigation.navigate('Home')} icon={{ name: 'times' }} title="Cancelar" accessibilityLabel="Cancelar" />
+                <Button buttonStyle={{ backgroundColor: '#ea0' }} onPress={navigation.goBack} icon={{ name: 'times' }} title="Cancelar" accessibilityLabel="Cancelar" />
             </View>
         </View>
     )

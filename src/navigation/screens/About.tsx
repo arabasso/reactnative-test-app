@@ -8,7 +8,7 @@ export default function About ({ navigation } : any) {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>
-                Exemplo de Sobre
+                Todos os direitos reservados.
             </Text>
         </View>
     )

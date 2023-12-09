@@ -26,9 +26,6 @@ export default function Routes() {
                     <DrawerRoutes />
                 </NavigationContainer>
             </View>
-            <View style={styles.footer}>
-                <Text style={styles.footerText}>&#169; Todos os direitos reservados</Text>
-            </View>
         </SafeAreaView>
     );
 }
@@ -39,13 +36,4 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         justifyContent: "center",
     },
-    footer: {
-        backgroundColor: theme.colors.primary,
-        alignSelf: 'stretch',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    footerText: {
-        color: theme.colors.foreground,
-    }
 }));
