@@ -21,13 +21,12 @@ export default function DrawerRoutes() {
     );
 }
 
-function CustomDrawerContent(props:any) {
+function CustomDrawerContent(props: any) {
     const { theme } = useTheme();
     const { mode, setMode } = useThemeMode();
 
     function switchTheme() {
         setMode(theme.mode === 'dark' ? 'light' : 'dark');
-        StatusBar.setBarStyle(theme.mode === 'dark' ? 'light-content' : 'dark-content')
 
         props.navigation.closeDrawer();
     }
@@ -36,11 +35,9 @@ function CustomDrawerContent(props:any) {
 
     return (
         <>
-            <View>
-                <ImageBackground source={image} resizeMode="cover" style={{ height: 200, justifyContent: 'flex-end', paddingBottom: 15 }}>
-                    <Text style={{ textAlign: 'center', color: theme.colors.foreground }}>Visitante</Text>
-                </ImageBackground>
-            </View>
+            <ImageBackground source={image} resizeMode="cover" style={{ height: 200, justifyContent: 'flex-end', paddingBottom: 15 }}>
+                <Text style={{ textAlign: 'center', color: theme.colors.foreground }}>Visitante</Text>
+            </ImageBackground>
             <DrawerContentScrollView {...props}>
                 <DrawerItemList {...props} />
                 <DrawerItem labelStyle={{ color: theme.colors.black }}

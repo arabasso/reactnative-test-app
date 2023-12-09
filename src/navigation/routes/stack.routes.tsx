@@ -21,7 +21,7 @@ export default function StackRoutes() {
         }}>
             <Stack.Screen name="Home" component={Home} options={{ title: "Home" }} />
             <Stack.Screen name="PostsList" component={PostsList} options={{ title: "Publicações" }} />
-            <Stack.Screen name="PostsDetails" component={PostsDetails} options={{ title: "Publicações - Detalhes" }} />
+            <Stack.Screen name="PostsDetails" component={PostsDetails} options={{ title: "Detalhes" }} />
             <Stack.Screen name="Login" component={Login} options={{ title: "Login" }} />
         </Stack.Navigator>
     )
