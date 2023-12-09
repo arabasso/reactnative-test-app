@@ -4,6 +4,9 @@ import { Badge, makeStyles, Text } from "@rneui/themed";
 import { useRoute } from "@react-navigation/native";
 
 import Loading from "@components/Loading";
+import { BackendService } from "@services/BackendService";
+import { PostService } from "@services/PostService";
+import { UserService } from "@services/UserService";
 
 export default function PostsDetails() {
     const styles = useStyles();
@@ -15,8 +18,12 @@ export default function PostsDetails() {
     const [post, setPost] = useState<Post>({} as Post);
     const [user, setUser] = useState<User>({} as User);
     async function getPost() {
-        const post = await fetch(`https://dummyjson.com/posts/${id}`).then(t => t.json());
-        const user = await fetch(`https://dummyjson.com/users/${post.userId}`).then(t => t.json());
+        const service = new BackendService("https://dummyjson.com/");
+        const postService = new PostService(service);
+        const userService = new UserService(service);
+
+        const post = await postService.get(id);
+        const user = await userService.get(post.userId);
 
         setUser(user);
         setPost(post);

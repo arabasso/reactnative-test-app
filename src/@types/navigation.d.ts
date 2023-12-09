@@ -6,6 +6,8 @@ export declare global {
             About: undefined,
             PostsDetails: { id: number },
             PostsList: undefined,
+            UsersList: undefined,
+            UsersDetails: { id: number },
         }
     }
 }

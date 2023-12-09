@@ -1,23 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FlatList, ListRenderItemInfo, TouchableOpacity, View } from "react-native";
-import { makeStyles, Text, useTheme } from "@rneui/themed";
-import { Badge } from "@rneui/base";
+import { makeStyles, Text, useTheme, Image } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 
 import Loading from "@components/Loading";
+import { AuthContext } from "@contexts/AuthContext";
 import { BackendService } from "@services/BackendService";
-import { PostService } from "@services/PostService";
+import { UserService } from "@services/UserService";
 
 const itemsPerPage = 30;
 
-export default function PostsList() {
+export default function UsersList() {
     const { theme } = useTheme();
     const styles = useStyles();
     const navigation = useNavigation();
+    const { login } = useContext(AuthContext);
 
     const [hasMoreData, setHasMoreData] = useState(true);
     const [page, setPage] = useState(1);
-    const [posts, setPosts] = useState<Post[]>([]);
+    const [users, setUsers] = useState<User[]>([]);
     async function getPosts() {
         if (!hasMoreData) return;
 
@@ -25,11 +26,11 @@ export default function PostsList() {
         const limit = itemsPerPage;
 
         const service = new BackendService("https://dummyjson.com/");
-        const postService = new PostService(service);
+        const userService = new UserService(service, login?.token);
 
-        const result = await postService.getPosts(skip, limit);
+        const result = await userService.getUsers(skip, limit);
 
-        setPosts(prev => [...prev, ...result.posts]);
+        setUsers(prev => [...prev, ...result.users]);
         setPage(prev => prev + 1);
 
         if (result.total <= skip + limit) {
@@ -37,26 +38,32 @@ export default function PostsList() {
         }
     }
 
-    function renderItem({ item }: ListRenderItemInfo<Post>) {
+    function renderItem({ item }: ListRenderItemInfo<User>) {
         return (
-            <TouchableOpacity key={item.id} activeOpacity={0.7} style={styles.post} onPress={() => detailsPost(item.id)}>
-                <Text style={{ color: theme.colors.black }}>{item.title}</Text>
-                <View style={styles.tags}>
-                    {item.tags.map((m, i) => <Badge key={i} badgeStyle={styles.tag} value={m} />)}
+            <TouchableOpacity key={item.id} activeOpacity={0.7} style={styles.post} onPress={() => detailsUser(item.id)}>
+                <View style={{ flex: 1, flexDirection: "row", alignItems: "center", marginBottom: 10, marginRight: 10 }}>
+                    {item.image && <Image source={{ uri: item.image }} style={{ width: 40, height: 40 }} />}
+                    <View>
+                        <Text h4 style={{ color: theme.colors.black }}>{item.firstName} {item.lastName}</Text>
+                    </View>
+                </View>
+                <View style={{ flex: 1, flexDirection: "row", alignItems: "center", margin: 5 }}>
+                    <Text style={{ color: theme.colors.grey2, flex: 1 }}>{item.email}</Text>
+                    <Text style={{ color: theme.colors.grey2, flex: 1, textAlign: "right" }}>{item.phone}</Text>
                 </View>
             </TouchableOpacity>
         )
     }
 
-    function detailsPost(id: number) {
-        navigation.navigate('PostsDetails', { id: id });
+    function detailsUser(id: number) {
+        navigation.navigate('UsersDetails', { id: id });
     }
 
     return (
         <View style={styles.container}>
             <FlatList
                 contentContainerStyle={{ padding: 10 }}
-                data={posts}
+                data={users}
                 renderItem={renderItem}
                 ListFooterComponent={<Loading isLoading={hasMoreData} />}
                 onEndReached={getPosts}

@@ -17,7 +17,6 @@ export default function About ({ navigation } : any) {
 const useStyles = makeStyles((theme) => ({
     container: {
         flex: 1,
-        backgroundColor: theme.colors.background,
         alignItems: "center",
         justifyContent: "center",
     },

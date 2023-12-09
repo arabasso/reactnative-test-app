@@ -2,9 +2,10 @@ import { useTheme } from "@rneui/themed";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Home from "@screens/Home";
-import Login from "@screens/Login";
 import PostsList from "@screens/Posts/List";
 import PostsDetails from "@screens/Posts/Details";
+import UsersList from "@screens/Users/List";
+import UsersDetails from "@screens/Users/Details";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,7 +23,8 @@ export default function StackRoutes() {
             <Stack.Screen name="Home" component={Home} options={{ title: "Home" }} />
             <Stack.Screen name="PostsList" component={PostsList} options={{ title: "Publicações" }} />
             <Stack.Screen name="PostsDetails" component={PostsDetails} options={{ title: "Detalhes" }} />
-            <Stack.Screen name="Login" component={Login} options={{ title: "Login" }} />
+            <Stack.Screen name="UsersList" component={UsersList} options={{ title: "Usuários" }} />
+            <Stack.Screen name="UsersDetails" component={UsersDetails} options={{ title: "Detalhes" }} />
         </Stack.Navigator>
     )
 }
