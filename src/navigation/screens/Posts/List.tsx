@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import { FlatList, ListRenderItemInfo, TouchableOpacity, View } from "react-native";
 import { makeStyles, Text, useTheme } from "@rneui/themed";
 import { Badge } from "@rneui/base";
 import { useNavigation } from "@react-navigation/native";
 
 import Loading from "@components/Loading";
-import { BackendService } from "@services/BackendService";
-import { PostService } from "@services/PostService";
+import { BackendContext } from "@contexts/BackendContext";
 
-const itemsPerPage = 30;
+const itemsPerPage = 15;
 
 export default function PostsList() {
     const { theme } = useTheme();
     const styles = useStyles();
     const navigation = useNavigation();
+
+    const { postService } = useContext(BackendContext);
 
     const [hasMoreData, setHasMoreData] = useState(true);
     const [page, setPage] = useState(1);
@@ -23,9 +24,6 @@ export default function PostsList() {
 
         const skip = itemsPerPage * (page - 1);
         const limit = itemsPerPage;
-
-        const service = new BackendService("https://dummyjson.com/");
-        const postService = new PostService(service);
 
         const result = await postService.getPosts(skip, limit);
 

@@ -1,20 +1,19 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { FlatList, ListRenderItemInfo, TouchableOpacity, View } from "react-native";
 import { makeStyles, Text, useTheme, Image } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 
 import Loading from "@components/Loading";
-import { AuthContext } from "@contexts/AuthContext";
-import { BackendService } from "@services/BackendService";
-import { UserService } from "@services/UserService";
+import { BackendContext } from "@contexts/BackendContext";
 
-const itemsPerPage = 30;
+const itemsPerPage = 15;
 
 export default function UsersList() {
     const { theme } = useTheme();
     const styles = useStyles();
     const navigation = useNavigation();
-    const { login } = useContext(AuthContext);
+
+    const { bearerUserService } = useContext(BackendContext);
 
     const [hasMoreData, setHasMoreData] = useState(true);
     const [page, setPage] = useState(1);
@@ -25,10 +24,7 @@ export default function UsersList() {
         const skip = itemsPerPage * (page - 1);
         const limit = itemsPerPage;
 
-        const service = new BackendService("https://dummyjson.com/");
-        const userService = new UserService(service, login?.token);
-
-        const result = await userService.getUsers(skip, limit);
+        const result = await bearerUserService!.getUsers(skip, limit);
 
         setUsers(prev => [...prev, ...result.users]);
         setPage(prev => prev + 1);

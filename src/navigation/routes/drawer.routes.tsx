@@ -1,13 +1,13 @@
 import { ImageBackground, Linking } from "react-native";
+import { Icon } from "@rneui/base";
 import { useTheme, Text, useThemeMode } from "@rneui/themed";
 import { DrawerContentScrollView, DrawerItem, DrawerItemList, createDrawerNavigator } from "@react-navigation/drawer";
-import { Icon } from "@rneui/base";
 
+import { AuthContext } from "@contexts/AuthContext";
+import { useContext } from "react";
 import StackRoutes from "./stack.routes";
 import Login from "@screens/Login";
 import About from "@screens/About";
-import { AuthContext } from "@contexts/AuthContext";
-import { useContext } from "react";
 import Profile from "@screens/Profile";
 
 const Drawer = createDrawerNavigator();

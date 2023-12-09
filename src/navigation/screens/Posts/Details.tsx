@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { Badge, makeStyles, Text } from "@rneui/themed";
 import { useRoute } from "@react-navigation/native";
 
 import Loading from "@components/Loading";
-import { BackendService } from "@services/BackendService";
-import { PostService } from "@services/PostService";
-import { UserService } from "@services/UserService";
+import { BackendContext } from "@contexts/BackendContext";
 
 export default function PostsDetails() {
     const styles = useStyles();
     const route = useRoute();
+
+    const { postService, userService } = useContext(BackendContext);
 
     const { id } = route.params as { id: number };
 
@@ -18,10 +18,6 @@ export default function PostsDetails() {
     const [post, setPost] = useState<Post>({} as Post);
     const [user, setUser] = useState<User>({} as User);
     async function getPost() {
-        const service = new BackendService("https://dummyjson.com/");
-        const postService = new PostService(service);
-        const userService = new UserService(service);
-
         const post = await postService.get(id);
         const user = await userService.get(post.userId);
 

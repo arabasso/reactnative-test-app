@@ -4,25 +4,21 @@ import { makeStyles, Text, Image, useTheme } from "@rneui/themed";
 import { useRoute } from "@react-navigation/native";
 
 import Loading from "@components/Loading";
-import { BackendService } from "@services/BackendService";
-import { UserService } from "@services/UserService";
-import { AuthContext } from "@contexts/AuthContext";
+import { BackendContext } from "@contexts/BackendContext";
 
 export default function UsersDetails() {
     const styles = useStyles();
     const { theme } = useTheme();
     const route = useRoute();
-    const { login } = useContext(AuthContext);
+
+    const { bearerUserService } = useContext(BackendContext);
 
     const { id } = route.params as { id: number };
 
     const [isLoading, setIsLoading] = useState(true);
     const [user, setUser] = useState<User>({} as User);
     async function getPost() {
-        const service = new BackendService("https://dummyjson.com/");
-        const userService = new UserService(service, login?.token);
-
-        const user = await userService.get(id);
+        const user = await bearerUserService!.get(id);
 
         setUser(user);
         setIsLoading(false);

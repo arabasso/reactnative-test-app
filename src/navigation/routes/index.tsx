@@ -5,6 +5,7 @@ import { Image, Text, makeStyles, useTheme } from "@rneui/themed";
 
 import DrawerRoutes from "./drawer.routes";
 import { AuthProvider } from "@contexts/AuthContext";
+import { BackendProvider } from "@contexts/BackendContext";
 
 export default function Routes() {
     const { theme } = useTheme();
@@ -25,7 +26,9 @@ export default function Routes() {
                             </View>
                             <DrawerToggleButton tintColor={theme.colors.foreground} />
                         </View>
-                        <DrawerRoutes />
+                        <BackendProvider>
+                            <DrawerRoutes />
+                        </BackendProvider>
                     </NavigationContainer>
                 </View>
             </SafeAreaView>
