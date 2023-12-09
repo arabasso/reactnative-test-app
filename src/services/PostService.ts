@@ -7,7 +7,7 @@ export class PostService {
         return await this.backend.getJson<Post>("posts/" + id);
     }
 
-    public async getPosts(skip: number, limit: number): Promise<PostResult> {
+    public async list(skip: number, limit: number): Promise<PostResult> {
         return await this.backend.getJson<PostResult>(`posts?skip=${skip}&limit=${limit}`);
     }
 }

@@ -3,8 +3,8 @@ import { Icon } from "@rneui/base";
 import { useTheme, Text, useThemeMode } from "@rneui/themed";
 import { DrawerContentScrollView, DrawerItem, DrawerItemList, createDrawerNavigator } from "@react-navigation/drawer";
 
-import { AuthContext } from "@contexts/AuthContext";
-import { useContext } from "react";
+import { useAuth } from "@contexts/AuthContext";
+
 import StackRoutes from "./stack.routes";
 import Login from "@screens/Login";
 import About from "@screens/About";
@@ -14,7 +14,7 @@ const Drawer = createDrawerNavigator();
 
 export default function DrawerRoutes() {
     const { theme } = useTheme();
-    const { isLogged } = useContext(AuthContext);
+    const { isLogged } = useAuth();
 
     return (
         <Drawer.Navigator initialRouteName="StackRoutes" drawerContent={CustomDrawerContent} screenOptions={{ drawerActiveTintColor: theme.colors.black, drawerPosition: "right", headerLeft: (props) => null, headerRight: () => null, headerTintColor: theme.colors.black, headerTitleAlign: "center", drawerStyle: { backgroundColor: theme.colors.background }, drawerLabelStyle: { color: theme.colors.black }, headerStyle: { backgroundColor: theme.colors.background, shadowColor: "black" } }}>
@@ -29,7 +29,7 @@ export default function DrawerRoutes() {
 function CustomDrawerContent(props: any) {
     const { theme } = useTheme();
     const { mode, setMode } = useThemeMode();
-    const { isLogged, setLogin, login } = useContext(AuthContext);
+    const { isLogged, setLogin, login } = useAuth();
 
     function switchTheme() {
         setMode(theme.mode === 'dark' ? 'light' : 'dark');

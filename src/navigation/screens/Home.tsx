@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { View, FlatList, TouchableOpacity, ListRenderItemInfo } from "react-native";
 import { makeStyles, Text, useTheme } from "@rneui/themed";
 import { Icon } from "@rneui/base";
 import { useNavigation } from "@react-navigation/native";
-import { AuthContext } from "@contexts/AuthContext";
+import { useAuth } from "@contexts/AuthContext";
 
 type HomeButton = {
     id: any;
@@ -19,7 +19,7 @@ export default function Home() {
     const { theme } = useTheme();
     const styles = useStyles();
     const navigation = useNavigation();
-    const { isLogged } = useContext(AuthContext);
+    const { isLogged } = useAuth();
 
     const [botoes, setBotoes] = useState<HomeButton[]>([]);
     async function getBotoes() {

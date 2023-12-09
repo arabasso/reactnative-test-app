@@ -1,4 +1,4 @@
-import { Dispatch, createContext, useEffect, useState } from "react";
+import { Dispatch, createContext, useContext, useEffect, useState } from "react";
 
 type Auth = {
     isLogged: boolean;
@@ -18,3 +18,5 @@ export function AuthProvider({children}: any) {
         <AuthContext.Provider children={children} value={{ isLogged, login, setLogin }} />
     )
 }
+
+export const useAuth = () => useContext(AuthContext);

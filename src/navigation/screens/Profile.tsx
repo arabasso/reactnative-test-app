@@ -1,11 +1,10 @@
-import { useContext } from "react";
 import { View } from "react-native";
 import { makeStyles, Text } from "@rneui/themed";
-import { AuthContext } from "@contexts/AuthContext";
+import { useAuth } from "@contexts/AuthContext";
 
-export default function Profile({ navigation }: any) {
+export default function Profile() {
     const styles = useStyles();
-    const { login } = useContext(AuthContext);
+    const { login } = useAuth();
 
     return (
         <View style={styles.container}>

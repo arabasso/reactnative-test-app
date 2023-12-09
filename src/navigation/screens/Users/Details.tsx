@@ -1,17 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { makeStyles, Text, Image, useTheme } from "@rneui/themed";
 import { useRoute } from "@react-navigation/native";
 
-import Loading from "@components/Loading";
-import { BackendContext } from "@contexts/BackendContext";
+import { Loading } from "@components/Loading";
+import { useBackend } from "@contexts/BackendContext";
 
 export default function UsersDetails() {
     const styles = useStyles();
     const { theme } = useTheme();
     const route = useRoute();
 
-    const { bearerUserService } = useContext(BackendContext);
+    const { bearerUserService } = useBackend();
 
     const { id } = route.params as { id: number };
 

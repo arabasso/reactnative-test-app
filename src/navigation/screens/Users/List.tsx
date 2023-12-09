@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { FlatList, ListRenderItemInfo, TouchableOpacity, View } from "react-native";
 import { makeStyles, Text, useTheme, Image } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 
-import Loading from "@components/Loading";
-import { BackendContext } from "@contexts/BackendContext";
+import { Loading } from "@components/Loading";
+import { useBackend } from "@contexts/BackendContext";
 
 const itemsPerPage = 15;
 
@@ -13,7 +13,7 @@ export default function UsersList() {
     const styles = useStyles();
     const navigation = useNavigation();
 
-    const { bearerUserService } = useContext(BackendContext);
+    const { bearerUserService } = useBackend();
 
     const [hasMoreData, setHasMoreData] = useState(true);
     const [page, setPage] = useState(1);
@@ -24,7 +24,7 @@ export default function UsersList() {
         const skip = itemsPerPage * (page - 1);
         const limit = itemsPerPage;
 
-        const result = await bearerUserService!.getUsers(skip, limit);
+        const result = await bearerUserService!.list(skip, limit);
 
         setUsers(prev => [...prev, ...result.users]);
         setPage(prev => prev + 1);

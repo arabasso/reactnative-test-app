@@ -1,16 +1,15 @@
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Overlay } from '@rneui/base';
 import { Button, makeStyles, Text, useTheme } from '@rneui/themed';
 import { Alert, View } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import * as yup from "yup";
 
 import InputControl from '@components/InputControl';
-import { AuthContext } from '@contexts/AuthContext';
-import { BackendContext } from '@contexts/BackendContext';
-import Loading from '@components/Loading';
+import { useAuth } from '@contexts/AuthContext';
+import { useBackend } from '@contexts/BackendContext';
+import { LoadingOverlay } from '@components/Loading';
 
 type FormDataProps = {
     username: string;
@@ -22,8 +21,8 @@ export default function Login() {
     const styles = useStyles();
     const navigation = useNavigation();
 
-    const { setLogin } = useContext(AuthContext);
-    const { authService } = useContext(BackendContext);
+    const { setLogin } = useAuth();
+    const { authService } = useBackend();
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -58,12 +57,7 @@ export default function Login() {
 
     return (
         <View style={styles.container}>
-            <Overlay isVisible={isLoading} overlayStyle={{ backgroundColor: theme.colors.background }}>
-                <View style={{ margin: 10, flexDirection: "row", alignItems: "center" }}>
-                    <Loading isLoading={isLoading} />
-                    <Text style={{ marginLeft: 10 }}>Autenticando...</Text>
-                </View>
-            </Overlay>
+            <LoadingOverlay message="Autenticando..." isVisible={isLoading} />
             <View style={{ margin: 10 }}>
                 {!!errors.root?.message && <Text style={styles.error}>{errors.root?.message}</Text>}
                 <InputControl control={control} name="username" label="Usuário" autoCapitalize='none' leftIcon={{ name: 'user' }} errorMessage={errors.username?.message} />

@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { makeStyles, Text } from "@rneui/themed";
 
-export default function About ({ navigation } : any) {
+export default function About () {
     const styles = useStyles();
 
     return (

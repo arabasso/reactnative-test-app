@@ -3,13 +3,13 @@ import { NavigationContainer, DarkTheme, DefaultTheme } from "@react-navigation/
 import { StatusBar, SafeAreaView, View } from "react-native";
 import { Image, Text, makeStyles, useTheme } from "@rneui/themed";
 
-import DrawerRoutes from "./drawer.routes";
 import { AuthProvider } from "@contexts/AuthContext";
 import { BackendProvider } from "@contexts/BackendContext";
 
+import DrawerRoutes from "./drawer.routes";
+
 export default function Routes() {
     const { theme } = useTheme();
-    const styles = useStyles();
 
     const navigationContainerTheme = theme.mode === "dark" ? DarkTheme : DefaultTheme;
 

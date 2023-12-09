@@ -11,7 +11,7 @@ export class UserService {
         return await this.backend.getJson<User>("users/" + id);
     }
 
-    public async getUsers(skip: number, limit: number): Promise<UserResult> {
+    public async list(skip: number, limit: number): Promise<UserResult> {
         if (this.token) {
             return await this.backend.getJson<UserResult>(`auth/users?skip=${skip}&limit=${limit}`, { headers: { Authorization: "Bearer " + this.token}});
         }

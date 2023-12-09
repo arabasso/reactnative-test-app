@@ -32,3 +32,5 @@ export function BackendProvider({children}: any) {
         <BackendContext.Provider children={children} value={{ backendService: backendService, authService, postService, userService, bearerUserService }} />
     )
 }
+
+export const useBackend = () => useContext(BackendContext);
