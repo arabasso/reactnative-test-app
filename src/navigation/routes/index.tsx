@@ -1,7 +1,7 @@
 import { DrawerToggleButton } from "@react-navigation/drawer";
 import { NavigationContainer, DarkTheme, DefaultTheme } from "@react-navigation/native";
-import { StatusBar, SafeAreaView, View } from "react-native";
-import { Image, Text, makeStyles, useTheme } from "@rneui/themed";
+import { StatusBar, SafeAreaView, View, Image } from "react-native";
+import { Text, makeStyles, useTheme } from "@rneui/themed";
 
 import { AuthProvider } from "@contexts/AuthContext";
 import { BackendProvider } from "@contexts/BackendContext";

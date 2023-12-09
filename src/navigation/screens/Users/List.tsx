@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { FlatList, ListRenderItemInfo, TouchableOpacity, View } from "react-native";
-import { makeStyles, Text, useTheme, Image } from "@rneui/themed";
+import { FlatList, ListRenderItemInfo, TouchableOpacity, View, Image } from "react-native";
+import { makeStyles, Text, useTheme } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 
 import { Loading } from "@components/Loading";
@@ -38,7 +38,7 @@ export default function UsersList() {
         return (
             <TouchableOpacity key={item.id} activeOpacity={0.7} style={styles.post} onPress={() => detailsUser(item.id)}>
                 <View style={{ flex: 1, flexDirection: "row", alignItems: "center", marginBottom: 10, marginRight: 10 }}>
-                    {item.image && <Image source={{ uri: item.image }} style={{ width: 40, height: 40 }} />}
+                    {item.image && <Image source={{ uri: item.image }} resizeMode="cover" style={{ width: 40, height: 40 }} />}
                     <View>
                         <Text h4 style={{ color: theme.colors.black }}>{item.firstName} {item.lastName}</Text>
                     </View>

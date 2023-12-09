@@ -17,11 +17,11 @@ export default function DrawerRoutes() {
     const { isLogged } = useAuth();
 
     return (
-        <Drawer.Navigator initialRouteName="StackRoutes" drawerContent={CustomDrawerContent} screenOptions={{ drawerActiveTintColor: theme.colors.black, drawerPosition: "right", headerLeft: (props) => null, headerRight: () => null, headerTintColor: theme.colors.black, headerTitleAlign: "center", drawerStyle: { backgroundColor: theme.colors.background }, drawerLabelStyle: { color: theme.colors.black }, headerStyle: { backgroundColor: theme.colors.background, shadowColor: "black" } }}>
-            <Drawer.Screen name="StackRoutes" component={StackRoutes} options={{ title: 'Home', headerShown: false, drawerIcon: ({ size }) => <Icon type="font-awesome-5" name="home" color={theme.colors.black} size={size} /> }} />
-            { !isLogged && <Drawer.Screen name="Login" component={Login} options={{ title: "Login", headerShadowVisible: true, drawerIcon: ({ size }) => <Icon type="font-awesome-5" name="sign-in-alt" color={theme.colors.black} size={size} /> }} />}
-            { isLogged && <Drawer.Screen name="Profile" component={Profile} options={{ title: "Perfil", headerShadowVisible: true, drawerIcon: ({ size }) => <Icon type="font-awesome-5" name="user" color={theme.colors.black} size={size} /> }} />}
-            <Drawer.Screen name="Sobre" component={About} options={{ title: "Sobre", drawerIcon: ({ size }) => <Icon type="font-awesome-5" name="info-circle" color={theme.colors.black} size={size} /> }} />
+        <Drawer.Navigator initialRouteName="StackRoutes" drawerContent={CustomDrawerContent} screenOptions={{ headerShown: false, drawerActiveTintColor: theme.colors.black, drawerPosition: "right", headerLeft: (props) => null, headerRight: () => null, headerTintColor: theme.colors.black, headerTitleAlign: "center", drawerStyle: { backgroundColor: theme.colors.background }, drawerLabelStyle: { color: theme.colors.black }, headerStyle: { backgroundColor: theme.colors.background, shadowColor: "black" } }}>
+            <Drawer.Screen name="StackRoutes" component={StackRoutes} options={{ title: 'Home', drawerIcon: ({ size }) => <Icon type="font-awesome-5" name="home" color={theme.colors.black} size={size} /> }} />
+            { !isLogged && <Drawer.Screen name="Login" component={Login} options={{ title: "Login", headerShown: true, headerShadowVisible: true, drawerIcon: ({ size }) => <Icon type="font-awesome-5" name="sign-in-alt" color={theme.colors.black} size={size} /> }} />}
+            { isLogged && <Drawer.Screen name="Profile" component={Profile} options={{ title: "Perfil", headerShown: true, headerShadowVisible: true, drawerIcon: ({ size }) => <Icon type="font-awesome-5" name="user" color={theme.colors.black} size={size} /> }} />}
+            <Drawer.Screen name="Sobre" component={About} options={{ title: "Sobre", headerShown: true, drawerIcon: ({ size }) => <Icon type="font-awesome-5" name="info-circle" color={theme.colors.black} size={size} /> }} />
         </Drawer.Navigator>
     );
 }
