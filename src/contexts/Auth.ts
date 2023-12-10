@@ -1,4 +1,4 @@
-import { Dispatch, createContext, useContext, useEffect, useState } from "react";
+import { Dispatch, createContext } from "react";
 
 type Auth = {
     isLogged: boolean;

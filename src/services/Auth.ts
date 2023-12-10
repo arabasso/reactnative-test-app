@@ -1,4 +1,4 @@
-import { BackendService } from "./BackendService";
+import { BackendService } from "./Backend";
 
 export class AuthService {
   constructor(private backendService: BackendService) {}

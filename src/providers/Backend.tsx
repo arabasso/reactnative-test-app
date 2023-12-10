@@ -1,9 +1,9 @@
 import { AuthContext } from "@contexts/Auth";
 import { BackendContext } from "@contexts/Backend";
-import { AuthService } from "@services/AuthService";
-import { BackendService } from "@services/BackendService";
-import { PostService } from "@services/PostService";
-import { UserService } from "@services/UserService";
+import { AuthService } from "@services/Auth";
+import { BackendService } from "@services/Backend";
+import { PostService } from "@services/Post";
+import { UserService } from "@services/User";
 import { useState, useContext, useEffect } from "react";
 
 export function BackendProvider({children}: any) {

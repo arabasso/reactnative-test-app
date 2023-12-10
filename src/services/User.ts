@@ -1,4 +1,4 @@
-import { BackendService } from "./BackendService";
+import { BackendService } from "./Backend";
 
 export class UserService {
     constructor(private backend: BackendService, private token: string | undefined = undefined) { }
