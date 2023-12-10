@@ -3,7 +3,7 @@ import { View, FlatList, TouchableOpacity, ListRenderItemInfo } from "react-nati
 import { makeStyles, Text, useTheme } from "@rneui/themed";
 import { Icon } from "@rneui/base";
 import { useNavigation } from "@react-navigation/native";
-import { useAuth } from "@contexts/AuthContext";
+import { useAuth } from "@hooks/Auth";
 
 type HomeButton = {
     id: any;
@@ -28,14 +28,14 @@ export default function Home() {
                 id: 1,
                 requiresLogin: false,
                 icon: <Icon type="font-awesome-5" solid name="edit" style={{ marginBottom: 10 }} color={theme.colors.foreground} />,
-                text: 'Publicações',
+                text: "Publicações",
                 navigateTo: () => navigation.navigate("PostsList")
             },
             {
                 id: 2,
                 requiresLogin: true,
                 icon: <Icon type="font-awesome-5" solid name="user" style={{ marginBottom: 10 }} color={theme.colors.foreground} />,
-                text: 'Usuários',
+                text: "Usuários",
                 navigateTo: () => navigation.navigate("UsersList")
             },
         ];
@@ -51,15 +51,14 @@ export default function Home() {
 
     function renderItem({ item }: ListRenderItemInfo<HomeButton>) {
         return (
-            <View style={{ flex: 1, flexDirection: 'column', margin: 10 }}>
+            <View style={{ flex: 1, flexDirection: "column", margin: 10 }}>
                 {!item.id ? <></> :
-                    item.requiresLogin && !isLogged ? <></> :
-                        (
-                            <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={item.navigateTo}>
-                                {item.icon}
-                                <Text style={{ color: theme.colors.foreground }}>{item.text}</Text>
-                            </TouchableOpacity>
-                        )
+                    item.requiresLogin && !isLogged ? <></> : (
+                        <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={item.navigateTo}>
+                            {item.icon}
+                            <Text style={{ color: theme.colors.foreground }}>{item.text}</Text>
+                        </TouchableOpacity>
+                    )
                 }
             </View>
         )
@@ -81,11 +80,11 @@ const useStyles = makeStyles((theme) => ({
     container: {
         flex: 1,
         padding: 0,
-        margin: 10,
+        margin: theme.spacing.lg,
     },
     button: {
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
         height: 90,
         backgroundColor: theme.colors.primary,
         borderRadius: 5,

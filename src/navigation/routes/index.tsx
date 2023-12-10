@@ -3,25 +3,33 @@ import { NavigationContainer, DarkTheme, DefaultTheme } from "@react-navigation/
 import { StatusBar, SafeAreaView, View, Image } from "react-native";
 import { Text, makeStyles, useTheme } from "@rneui/themed";
 
-import { AuthProvider } from "@contexts/AuthContext";
-import { BackendProvider } from "@contexts/BackendContext";
+import { AuthProvider } from "@providers/Auth";
+import { BackendProvider } from "@providers/Backend";
 
 import DrawerRoutes from "./drawer.routes";
 
 export default function Routes() {
+    const styles = useStyles();
     const { theme } = useTheme();
 
     const navigationContainerTheme = theme.mode === "dark" ? DarkTheme : DefaultTheme;
 
     return (
         <AuthProvider>
-            <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.primary }}>
+            <SafeAreaView style={styles.container}>
                 <StatusBar barStyle="light-content" backgroundColor={theme.colors.primary} />
-                <View style={{ flex: 1 }}>
-                    <NavigationContainer theme={{ ...navigationContainerTheme, colors: { ...navigationContainerTheme.colors, background: theme.colors.background } }}>
-                        <View style={{ flexDirection: 'row', backgroundColor: theme.colors.primary, alignItems: 'center', justifyContent: 'center', padding: 3 }}>
-                            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                <Image source={require("assets/icon.png")} style={{ width: 40, height: 40, marginRight: 10 }} />
+                <View style={styles.innerContainer}>
+                    <NavigationContainer
+                        theme={{
+                            ...navigationContainerTheme,
+                            colors: {
+                                ...navigationContainerTheme.colors,
+                                background: theme.colors.background
+                            }
+                        }}>
+                        <View style={styles.headerContainer}>
+                            <View style={styles.header}>
+                                <Image source={require("@assets/icon.png")} style={styles.headerImage} />
                                 <Text h4 style={{ color: theme.colors.foreground }}>Aplicação</Text>
                             </View>
                             <DrawerToggleButton tintColor={theme.colors.foreground} />
@@ -39,7 +47,27 @@ export default function Routes() {
 const useStyles = makeStyles((theme) => ({
     container: {
         flex: 1,
+        backgroundColor: theme.colors.primary
+    },
+    innerContainer: {
+        flex: 1,
+    },
+    headerContainer: {
+        flexDirection: "row",
+        backgroundColor: theme.colors.primary,
         alignItems: "center",
         justifyContent: "center",
+        padding: theme.spacing.lg,
+    },
+    header: {
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    headerImage: {
+        width: 40,
+        height: 40,
+        marginRight: theme.spacing.lg,
     },
 }));

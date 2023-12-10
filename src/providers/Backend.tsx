@@ -1,19 +1,10 @@
+import { AuthContext } from "@contexts/Auth";
+import { BackendContext } from "@contexts/Backend";
+import { AuthService } from "@services/AuthService";
 import { BackendService } from "@services/BackendService";
 import { PostService } from "@services/PostService";
 import { UserService } from "@services/UserService";
-import { createContext, useContext, useEffect, useState } from "react";
-import { AuthContext } from "./AuthContext";
-import { AuthService } from "@services/AuthService";
-
-type Backend = {
-    backendService: BackendService;
-    authService: AuthService;
-    postService: PostService;
-    userService: UserService;
-    bearerUserService: UserService | undefined;
-}
-
-export const BackendContext = createContext<Backend>({} as Backend);
+import { useState, useContext, useEffect } from "react";
 
 export function BackendProvider({children}: any) {
     const [ backendService ] = useState(new BackendService("https://dummyjson.com/"));
@@ -32,5 +23,3 @@ export function BackendProvider({children}: any) {
         <BackendContext.Provider children={children} value={{ backendService: backendService, authService, postService, userService, bearerUserService }} />
     )
 }
-
-export const useBackend = () => useContext(BackendContext);

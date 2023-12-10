@@ -14,10 +14,16 @@ export default function StackRoutes() {
 
     return (
         <Stack.Navigator screenOptions={{
-            headerStyle: { backgroundColor: theme.colors.background },
-            contentStyle: { backgroundColor: theme.colors.background },
-            headerTitleAlign: 'center',
-            headerTitleStyle: { color: theme.colors.black },
+            headerStyle: {
+                backgroundColor: theme.colors.background
+            },
+            contentStyle: {
+                backgroundColor: theme.colors.background
+            },
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+                color: theme.colors.black
+            },
             headerTintColor: theme.colors.black,
         }}>
             <Stack.Screen name="Home" component={Home} options={{ title: "Home" }} />

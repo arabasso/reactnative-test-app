@@ -5,13 +5,15 @@ module.exports = function(api) {
     plugins: [
       'react-native-reanimated/plugin',
       ["module-resolver", {
-        "root": ["./src"],
+        "root": ["./"],
         "alias": {
-          "@assets": "./src/assets",
+          "@assets": "./assets",
           "@components": "./src/components",
           "@contexts": "./src/contexts",
+          "@hooks": "./src/hooks",
           "@screens": "./src/navigation/screens",
           "@navigation": "./src/navigation",
+          "@providers": "./src/providers",
           "@services": "./src/services",
         }
       }]

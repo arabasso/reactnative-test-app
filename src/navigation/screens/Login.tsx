@@ -1,15 +1,14 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, makeStyles, Text, useTheme } from '@rneui/themed';
-import { Alert, View } from 'react-native';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { Button, Dialog, makeStyles, useTheme } from "@rneui/themed";
+import { Alert, ScrollView } from "react-native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import * as yup from "yup";
 
-import InputControl from '@components/InputControl';
-import { useAuth } from '@contexts/AuthContext';
-import { useBackend } from '@contexts/BackendContext';
-import { LoadingOverlay } from '@components/Loading';
+import InputControl from "@components/InputControl";
+import { useAuth } from "@hooks/Auth";
+import { useBackend } from "@hooks/Backend";
 
 type FormDataProps = {
     username: string;
@@ -17,8 +16,8 @@ type FormDataProps = {
 };
 
 export default function Login() {
-    const { theme } = useTheme();
     const styles = useStyles();
+    const { theme } = useTheme();
     const navigation = useNavigation();
 
     const { setLogin } = useAuth();
@@ -28,11 +27,11 @@ export default function Login() {
 
     const validationSchema = yup.object({
         root: yup.string(),
-        username: yup.string().required().label('Usuário'),
-        password: yup.string().required().min(3).label('Senha'),
+        username: yup.string().required().label("Usuário"),
+        password: yup.string().required().min(3).label("Senha"),
     });
 
-    const { control, handleSubmit, formState: { errors }, reset } = useForm<FormDataProps>({ resolver: yupResolver(validationSchema), defaultValues: { username: '', password: '' } })
+    const { control, handleSubmit, formState: { errors }, reset } = useForm<FormDataProps>({ resolver: yupResolver(validationSchema), defaultValues: { username: "", password: "" } })
 
     async function onSubmit(data: any) {
         setIsLoading(true);
@@ -45,41 +44,65 @@ export default function Login() {
         }).catch(err => {
             setIsLoading(false);
 
-            Alert.alert("Erro", err.message);
+            Alert.alert("Erro", err.message, [{ text: "OK" }], {  userInterfaceStyle: "dark" });
         });
     };
 
     function onFocus() {
-        reset({ username: 'atuny0', password: '9uQFF1Lh' });
+        reset({ username: "atuny0", password: "9uQFF1Lh" });
     }
 
     useFocusEffect(useCallback(onFocus, []));
 
     return (
-        <View style={styles.container}>
-            <LoadingOverlay message="Autenticando..." isVisible={isLoading} />
-            <View style={{ margin: 10 }}>
-                {!!errors.root?.message && <Text style={styles.error}>{errors.root?.message}</Text>}
-                <InputControl control={control} name="username" label="Usuário" autoCapitalize='none' leftIcon={{ name: 'user', solid: true }} errorMessage={errors.username?.message} />
-                <InputControl control={control} name="password" label="Senha" secureTextEntry={true} leftIcon={{ name: 'lock' }} errorMessage={errors.password?.message} />
-                <Button onPress={handleSubmit(onSubmit)} icon={{ name: 'sign-in-alt' }} title="Entrar" accessibilityLabel="Entrar" />
-                <Button buttonStyle={{ backgroundColor: '#ea0' }} onPress={navigation.goBack} icon={{ name: 'times' }} title="Cancelar" accessibilityLabel="Cancelar" />
-            </View>
-        </View>
+        <ScrollView style={styles.container}>
+            <Dialog isVisible={isLoading}>
+                <Dialog.Loading loadingProps={{ size: "large" }} />
+            </Dialog>
+            <InputControl
+                control={control}
+                name="username"
+                label="Usuário"
+                autoCapitalize="none"
+                leftIcon={{
+                    name: "user",
+                    solid: true,
+                }}
+                errorMessage={errors.username?.message} />
+            <InputControl
+                control={control}
+                name="password"
+                label="Senha"
+                secureTextEntry={true}
+                leftIcon={{
+                    name: "lock",
+                }}
+                errorMessage={errors.password?.message} />
+            <Button
+                onPress={handleSubmit(onSubmit)}
+                icon={{ name: "sign-in-alt" }}
+                title="Entrar"
+                accessibilityLabel="Entrar" />
+            <Button
+                buttonStyle={{
+                    backgroundColor: "#ea0"
+                }}
+                onPress={navigation.goBack}
+                icon={{
+                    name: "times"
+                }}
+                title="Cancelar"
+                accessibilityLabel="Cancelar" />
+        </ScrollView>
     )
 };
 
 const useStyles = makeStyles((theme) => ({
     container: {
         flex: 1,
-        backgroundColor: theme.colors.background,
-        padding: theme.spacing.lg
+        margin: theme.spacing.lg,
     },
     text: {
         marginVertical: theme.spacing.lg,
     },
-    error: {
-        color: theme.colors.error,
-        textAlign: 'center',
-    }
 }));

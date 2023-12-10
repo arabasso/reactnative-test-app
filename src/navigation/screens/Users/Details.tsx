@@ -4,7 +4,7 @@ import { makeStyles, Text, useTheme } from "@rneui/themed";
 import { useRoute } from "@react-navigation/native";
 
 import { Loading } from "@components/Loading";
-import { useBackend } from "@contexts/BackendContext";
+import { useBackend } from "@hooks/Backend";
 
 export default function UsersDetails() {
     const styles = useStyles();
@@ -30,12 +30,22 @@ export default function UsersDetails() {
 
     return (
         <ScrollView style={styles.container}>
-            <View style={{ flex: 1, flexDirection: "row", alignItems: "center", marginBottom: 10 }}>
-                {user.image && <Image source={{ uri: user.image }} style={{ width: 40, height: 40, marginRight: 10 }} />}
+            <View style={styles.title}>
+                {user.image && (
+                    <Image source={{ uri: user.image }} style={{ width: 40, height: 40, marginRight: 10 }} />
+                )}
                 <View>
                     <Text h4 style={{ color: theme.colors.black }}>{user.firstName} {user.lastName}</Text>
                 </View>
             </View>
+            <Text>
+                <Text style={styles.label}>Login: </Text>
+                {user.username}
+            </Text>
+            <Text>
+                <Text style={styles.label}>Senha: </Text>
+                {user.password}
+            </Text>
             <Text>
                 <Text style={styles.label}>Idade: </Text>
                 {user.age}
@@ -67,7 +77,13 @@ export default function UsersDetails() {
 const useStyles = makeStyles((theme) => ({
     container: {
         flex: 1,
-        padding: 10
+        padding: theme.spacing.lg,
+    },
+    title: {
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+        marginBottom: theme.spacing.lg,
     },
     label: {
         fontWeight: "bold",

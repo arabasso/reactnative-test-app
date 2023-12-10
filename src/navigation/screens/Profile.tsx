@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { makeStyles, Text } from "@rneui/themed";
-import { useAuth } from "@contexts/AuthContext";
+import { useAuth } from "@hooks/Auth";
 
 export default function Profile() {
     const styles = useStyles();
@@ -33,7 +33,7 @@ export default function Profile() {
 const useStyles = makeStyles((theme) => ({
     container: {
         flex: 1,
-        padding: 10,
+        padding: theme.spacing.lg,
     },
     text: {
         marginVertical: theme.spacing.lg,

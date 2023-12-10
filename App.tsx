@@ -38,7 +38,7 @@ const theme = createTheme({
   components: {
     Text: (props, theme) => ({
       style: {
-        marginBottom: 5,
+        marginBottom: theme.spacing.lg,
       }
     }),
     Input: (props, theme) => ({
@@ -48,19 +48,19 @@ const theme = createTheme({
       inputContainerStyle: {
         borderWidth: 1,
         borderRadius: 3,
-        paddingHorizontal: 8,
+        paddingHorizontal: theme.spacing.lg,
         backgroundColor: theme.colors.background,
         borderColor: props.renderErrorMessage || !!props.errorMessage ? errorMessageColor : theme.colors.black,
       },
       labelStyle: {
         color: theme.colors.black,
-        paddingBottom: 3,
+        paddingBottom: theme.spacing.md,
       },
       inputStyle: {
         color: props.renderErrorMessage || !!props.errorMessage ? errorMessageColor : theme.colors.black,
       },
       leftIconContainerStyle: {
-        paddingRight: props.leftIcon ? 8 : 0,
+        paddingRight: props.leftIcon ? theme.spacing.lg : 0,
       },
       leftIcon: props.leftIcon ? { type: iconType, color: props.renderErrorMessage || !!props.errorMessage ? errorMessageColor : theme.colors.black } : undefined,
       errorStyle: {
@@ -74,11 +74,11 @@ const theme = createTheme({
     Button: (props, theme) => ({
       containerStyle: {
         paddingHorizontal: 0,
-        marginBottom: 10,
+        marginBottom: theme.spacing.lg,
       },
       buttonStyle: {
         borderRadius: 3,
-        padding: 10,
+        padding: theme.spacing.lg,
       },
       icon: props.icon ? { type: iconType, color: theme.mode === 'dark' ? theme.colors.black : theme.colors.white } : undefined
     })

@@ -4,7 +4,7 @@ import { Badge, makeStyles, Text } from "@rneui/themed";
 import { useRoute } from "@react-navigation/native";
 
 import { Loading } from "@components/Loading";
-import { useBackend } from "@contexts/BackendContext";
+import { useBackend } from "@hooks/Backend";
 
 export default function PostsDetails() {
     const styles = useStyles();
@@ -37,7 +37,7 @@ export default function PostsDetails() {
             <View style={styles.tags}>
                 {post.tags.map((m, i) => <Badge key={i} badgeStyle={styles.tag} value={m} />)}
             </View>
-            <Text style={styles.text}>{post.body}</Text>
+            <Text style={styles.paragraph}>{post.body}</Text>
         </ScrollView>
     );
 }
@@ -45,22 +45,22 @@ export default function PostsDetails() {
 const useStyles = makeStyles((theme) => ({
     container: {
         flex: 1,
-        padding: 10
+        padding: theme.spacing.lg,
     },
     tags: {
         flex: 1,
         flexDirection: "row",
-        marginBottom: 10,
+        marginBottom: theme.spacing.lg,
     },
     tag: {
-        marginTop: 5,
-        marginRight: 5,
+        marginTop: theme.spacing.lg,
+        marginRight: theme.spacing.lg,
     },
     userText: {
         fontWeight: "bold",
         fontSize: 12,
     },
-    text: {
+    paragraph: {
         textAlign: "justify",
     },
 }));

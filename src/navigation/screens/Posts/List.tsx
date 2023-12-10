@@ -5,7 +5,7 @@ import { Badge } from "@rneui/base";
 import { useNavigation } from "@react-navigation/native";
 
 import { Loading } from "@components/Loading";
-import { useBackend } from "@contexts/BackendContext";
+import { useBackend } from "@hooks/Backend";
 
 const itemsPerPage = 15;
 
@@ -53,7 +53,7 @@ export default function PostsList() {
     return (
         <View style={styles.container}>
             <FlatList
-                contentContainerStyle={{ padding: 10 }}
+                contentContainerStyle={{ padding: theme.spacing.lg }}
                 data={posts}
                 renderItem={renderItem}
                 ListFooterComponent={<Loading isLoading={hasMoreData} />}
@@ -72,16 +72,14 @@ const useStyles = makeStyles((theme) => ({
     post: {
         backgroundColor: theme.colors.grey5,
         borderRadius: 5,
-        padding: 10,
-        margin: 5,
-        marginBottom: 10,
+        padding: theme.spacing.lg,
+        marginBottom: theme.spacing.lg,
     },
     tags: {
         flex: 1,
         flexDirection: "row",
     },
     tag: {
-        marginTop: 5,
-        marginRight: 5,
+        marginRight: theme.spacing.lg,
     },
 }));
