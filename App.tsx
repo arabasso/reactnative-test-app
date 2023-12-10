@@ -5,13 +5,24 @@ import * as Yup from 'yup';
 import { pt } from "yup-locale-pt";
 
 import Routes from '@navigation/routes';
+import { useState } from 'react';
+import { useStorage } from '@hooks/Storage';
 
 Yup.setLocale(pt);
 
 export default function App() {
-  theme.mode = useColorScheme() as ThemeMode;
+  const { storageService } = useStorage();
 
-  return (
+  const [ isLoading, setIsLoading ] = useState(true);
+  
+  const defaultMode = useColorScheme() as ThemeMode;
+  storageService.getItem<ThemeMode>("theme.mode").then(mode =>{
+    theme.mode = mode || defaultMode;
+
+    setIsLoading(false);
+  })
+
+  return !isLoading && (
     <ThemeProvider theme={theme}>
       <Routes />
     </ThemeProvider>
