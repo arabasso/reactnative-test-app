@@ -12,6 +12,8 @@ import Profile from "@screens/Profile";
 
 const Drawer = createDrawerNavigator();
 
+const iconWidth = 30;
+
 export default function DrawerRoutes() {
     const { theme } = useTheme();
     const { isLogged } = useAuth();
@@ -44,7 +46,7 @@ export default function DrawerRoutes() {
                 options={{
                     title: "Home",
                     header: () => null,
-                    drawerIcon: ({ size }) => <Icon type="font-awesome-5" name="home" color={theme.colors.black} size={size} />
+                    drawerIcon: ({ size }) => <Icon type="font-awesome-5" name="home" color={theme.colors.black} size={size} containerStyle={{ width: iconWidth }} />
                 }}
             />
             {!isLogged && (
@@ -54,7 +56,7 @@ export default function DrawerRoutes() {
                     options={{
                         title: "Login",
                         headerShadowVisible: true,
-                        drawerIcon: ({ size }) => <Icon type="font-awesome-5" name="sign-in-alt" color={theme.colors.black} size={size} />
+                        drawerIcon: ({ size }) => <Icon type="font-awesome-5" name="sign-in-alt" color={theme.colors.black} size={size} containerStyle={{ width: iconWidth }} />
                     }} />
             )}
             {isLogged && (
@@ -64,7 +66,7 @@ export default function DrawerRoutes() {
                     options={{
                         title: "Perfil",
                         headerShadowVisible: true,
-                        drawerIcon: ({ size }) => <Icon type="font-awesome-5" solid name="user" color={theme.colors.black} size={size} />
+                        drawerIcon: ({ size }) => <Icon type="font-awesome-5" solid name="user" color={theme.colors.black} size={size} containerStyle={{ width: iconWidth }} />
                     }}
                 />
             )}
@@ -73,7 +75,7 @@ export default function DrawerRoutes() {
                 component={About}
                 options={{
                     title: "Sobre",
-                    drawerIcon: ({ size }) => <Icon type="font-awesome-5" name="info-circle" color={theme.colors.black} size={size} />
+                    drawerIcon: ({ size }) => <Icon type="font-awesome-5" name="info-circle" color={theme.colors.black} size={size} containerStyle={{ width: iconWidth }} />
                 }}
             />
         </Drawer.Navigator>
@@ -127,18 +129,18 @@ function CustomDrawerContent(props: any) {
                 <DrawerItem labelStyle={styles.label}
                     label={(mode === "dark" ? "Modo claro" : "Modo escuro")}
                     onPress={switchTheme}
-                    icon={({ size }) => <Icon type="material" name="brightness-medium" color={theme.colors.black} size={size} />}
+                    icon={({ size }) => <Icon type="material" name="brightness-medium" color={theme.colors.black} size={size} containerStyle={{ width: iconWidth }} />}
                 />
                 <DrawerItem labelStyle={styles.label}
                     label="Ajuda"
                     onPress={() => Linking.openURL("https://mywebsite.com/help")}
-                    icon={({ size }) => <Icon type="font-awesome-5" name="hands-helping" color={theme.colors.black} size={size} />}
+                    icon={({ size }) => <Icon type="font-awesome-5" name="hands-helping" color={theme.colors.black} size={size} containerStyle={{ width: iconWidth }} />}
                 />
                 {isLogged && (
                     <DrawerItem labelStyle={styles.label}
                         label="Sair"
                         onPress={logout}
-                        icon={({ size }) => <Icon type="font-awesome-5" name="sign-out-alt" color={theme.colors.black} size={size} />}
+                        icon={({ size }) => <Icon type="font-awesome-5" name="sign-out-alt" color={theme.colors.black} size={size} containerStyle={{ width: iconWidth }} />}
                     />
                 )}
             </DrawerContentScrollView>
