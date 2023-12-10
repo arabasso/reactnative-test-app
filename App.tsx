@@ -16,8 +16,8 @@ export default function App() {
   const [ isLoading, setIsLoading ] = useState(true);
   
   const defaultMode = useColorScheme() as ThemeMode;
-  useEffect(() =>{
-    storageService.getItem<ThemeMode>("theme.mode").then(mode =>{
+  useEffect(() => {
+    storageService.getItem<ThemeMode>("theme.mode").then(mode => {
       theme.mode = mode || defaultMode;
   
       setIsLoading(false);

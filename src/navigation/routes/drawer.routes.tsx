@@ -10,6 +10,7 @@ import Login from "@screens/Login";
 import About from "@screens/About";
 import Profile from "@screens/Profile";
 import { useStorage } from "@hooks/Storage";
+import { useEffect } from "react";
 
 const Drawer = createDrawerNavigator();
 
@@ -90,12 +91,12 @@ function CustomDrawerContent(props: any) {
     const { isLogged, setLogin, login } = useAuth();
     const { storageService } = useStorage();
 
+    useEffect(() => { storageService.setItem("theme.mode", mode); }, [mode]);
+
     function switchTheme() {
         const mode = theme.mode === "dark" ? "light" : "dark";
         
         setMode(mode);
-
-        storageService.setItem("theme.mode", mode);
 
         props.navigation.closeDrawer();
     }

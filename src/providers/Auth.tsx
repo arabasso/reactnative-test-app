@@ -10,6 +10,8 @@ export function AuthProvider({children}: any) {
     useEffect(() => {
         if (isLogged && !login) {
             secureStorageService.removeItem("auth.login");
+        } else if (login) {
+            secureStorageService.setItem("auth.login", login);
         }
 
         setIsLogged(!!login);
