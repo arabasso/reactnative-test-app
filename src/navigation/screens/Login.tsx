@@ -60,7 +60,7 @@ export default function Login() {
             <LoadingOverlay message="Autenticando..." isVisible={isLoading} />
             <View style={{ margin: 10 }}>
                 {!!errors.root?.message && <Text style={styles.error}>{errors.root?.message}</Text>}
-                <InputControl control={control} name="username" label="Usuário" autoCapitalize='none' leftIcon={{ name: 'user' }} errorMessage={errors.username?.message} />
+                <InputControl control={control} name="username" label="Usuário" autoCapitalize='none' leftIcon={{ name: 'user', solid: true }} errorMessage={errors.username?.message} />
                 <InputControl control={control} name="password" label="Senha" secureTextEntry={true} leftIcon={{ name: 'lock' }} errorMessage={errors.password?.message} />
                 <Button onPress={handleSubmit(onSubmit)} icon={{ name: 'sign-in-alt' }} title="Entrar" accessibilityLabel="Entrar" />
                 <Button buttonStyle={{ backgroundColor: '#ea0' }} onPress={navigation.goBack} icon={{ name: 'times' }} title="Cancelar" accessibilityLabel="Cancelar" />

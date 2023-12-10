@@ -27,14 +27,14 @@ export default function Home() {
             {
                 id: 1,
                 requiresLogin: false,
-                icon: <Icon type="font-awesome-5" name="edit" style={{ marginBottom: 10 }} color={theme.colors.foreground} />,
+                icon: <Icon type="font-awesome-5" solid name="edit" style={{ marginBottom: 10 }} color={theme.colors.foreground} />,
                 text: 'Publicações',
                 navigateTo: () => navigation.navigate("PostsList")
             },
             {
                 id: 2,
                 requiresLogin: true,
-                icon: <Icon type="font-awesome-5" name="user" style={{ marginBottom: 10 }} color={theme.colors.foreground} />,
+                icon: <Icon type="font-awesome-5" solid name="user" style={{ marginBottom: 10 }} color={theme.colors.foreground} />,
                 text: 'Usuários',
                 navigateTo: () => navigation.navigate("UsersList")
             },

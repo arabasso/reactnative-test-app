@@ -36,12 +36,10 @@ export default function UsersList() {
 
     function renderItem({ item }: ListRenderItemInfo<User>) {
         return (
-            <TouchableOpacity key={item.id} activeOpacity={0.7} style={styles.post} onPress={() => detailsUser(item.id)}>
-                <View style={{ flex: 1, flexDirection: "row", alignItems: "center", marginBottom: 10, marginRight: 10 }}>
-                    {item.image && <Image source={{ uri: item.image }} resizeMode="cover" style={{ width: 40, height: 40 }} />}
-                    <View>
-                        <Text h4 style={{ color: theme.colors.black }}>{item.firstName} {item.lastName}</Text>
-                    </View>
+            <TouchableOpacity key={item.id} activeOpacity={0.7} style={styles.user} onPress={() => detailsUser(item.id)}>
+                <View style={{ flex: 1, flexDirection: "row", alignItems: "center", marginBottom: 10 }}>
+                    {item.image && <Image source={{ uri: item.image }} resizeMode="cover" style={{ width: 40, height: 40, marginRight: 10 }} />}
+                    <Text h4 style={{ color: theme.colors.black }}>{item.firstName} {item.lastName}</Text>
                 </View>
                 <View style={{ flex: 1, flexDirection: "row", alignItems: "center", margin: 5 }}>
                     <Text style={{ color: theme.colors.grey2, flex: 1 }}>{item.email}</Text>
@@ -74,11 +72,12 @@ const useStyles = makeStyles((theme) => ({
     container: {
         flex: 1,
     },
-    post: {
+    user: {
         backgroundColor: theme.colors.grey5,
         borderRadius: 5,
-        padding: 5,
+        padding: 10,
         margin: 5,
+        marginBottom: 10,
     },
     tags: {
         flex: 1,

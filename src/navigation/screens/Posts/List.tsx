@@ -72,8 +72,9 @@ const useStyles = makeStyles((theme) => ({
     post: {
         backgroundColor: theme.colors.grey5,
         borderRadius: 5,
-        padding: 5,
+        padding: 10,
         margin: 5,
+        marginBottom: 10,
     },
     tags: {
         flex: 1,
