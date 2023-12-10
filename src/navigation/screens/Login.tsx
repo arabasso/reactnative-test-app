@@ -6,9 +6,10 @@ import { Alert, ScrollView } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import * as yup from "yup";
 
-import InputControl from "@components/InputControl";
 import { useAuth } from "@hooks/Auth";
 import { useBackend } from "@hooks/Backend";
+
+import InputControl from "@components/InputControl";
 
 type FormDataProps = {
     username: string;
@@ -17,7 +18,6 @@ type FormDataProps = {
 
 export default function Login() {
     const styles = useStyles();
-    const { theme } = useTheme();
     const navigation = useNavigation();
 
     const { setLogin } = useAuth();
@@ -40,6 +40,7 @@ export default function Login() {
             setIsLoading(false);
 
             setLogin(login);
+
             navigation.goBack();
         }).catch(err => {
             setIsLoading(false);

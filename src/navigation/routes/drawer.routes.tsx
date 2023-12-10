@@ -1,6 +1,6 @@
 import { Linking, View } from "react-native";
 import { Avatar, Icon } from "@rneui/base";
-import { useTheme, Text, useThemeMode, ThemeMode, makeStyles } from "@rneui/themed";
+import { useTheme, Text, useThemeMode, makeStyles } from "@rneui/themed";
 import { DrawerContentScrollView, DrawerItem, DrawerItemList, createDrawerNavigator } from "@react-navigation/drawer";
 
 import { useAuth } from "@hooks/Auth";
