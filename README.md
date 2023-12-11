@@ -2,7 +2,7 @@
 
 ## Aplicação React Native com Expo
 
-Este é um exemplo de aplicação completa, com suporte temas e controles customizáveis (React Native Elements), navegação por meio de menu lateral e por pilha (React Navigation Drawer / Stack), armazenamento de dados comuns e criptografados (AsyncStorage / SecureStore), tela de login com validação de formulário (React Hook Form / Yup) e controle de permissão por usuário autenticado, requisições GET e POST para uma API remota (Axios / https://dummyjson.com/), separação em camadas, e suporte a Hooks, Components, Contexts, Providers e Services customizados.
+Este é um exemplo de aplicação completa, com suporte temas e controles customizáveis (React Native Elements), navegação por meio de menu lateral e por pilha (React Navigation Drawer / Stack), armazenamento de dados comuns e criptografados (AsyncStorage / SecureStore), tela de login com validação de formulário (React Hook Form / Yup) e controle de permissão por usuário autenticado usando tokens JWT com expiração (e atualização do token expirado), requisições GET e POST para uma API remota (Axios / https://dummyjson.com/), separação em camadas, e suporte a Hooks, Components, Contexts, Providers e Services customizados.
 
 ![Screenshot](./screenshot.gif)
 
