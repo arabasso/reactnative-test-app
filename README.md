@@ -44,7 +44,7 @@ Precisa do SDK do iPhone para executar:
 npx expo start --ios
 ```
 
-### Compilando
+### Compilando e Instalando no Smartphone (precisa estar conectado pelo cabo USB) ou Emulador (precisa do SDK instalado)
 
 É necessário gerar o prebuild para poder compilar:
 
