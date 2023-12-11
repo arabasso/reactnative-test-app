@@ -16,7 +16,7 @@ export function ApiProvider({ children }: any) {
     const [userService] = useState(new UserService(axios.create({ baseURL: baseUrl })));
     const [bearerUserService, setBearerUserService] = useState<UserService>();
 
-    const { login, setLogin } = useAuth();
+    const { login } = useAuth();
     const { secureStorageService } = useStorage();
 
     useEffect(() => {
