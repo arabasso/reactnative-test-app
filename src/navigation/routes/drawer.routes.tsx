@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Linking, View } from "react-native";
 import { Avatar, Icon } from "@rneui/base";
 import { useTheme, Text, useThemeMode, makeStyles } from "@rneui/themed";
@@ -10,7 +11,6 @@ import Login from "@screens/Login";
 import About from "@screens/About";
 import Profile from "@screens/Profile";
 import { useStorage } from "@hooks/Storage";
-import { useEffect } from "react";
 
 const Drawer = createDrawerNavigator();
 
@@ -160,7 +160,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.colors.grey3,
         height: 180,
         justifyContent: "flex-end",
-        paddingBottom: theme.spacing.lg,
+        paddingBottom: theme.spacing.md,
     },
     headerUsername: {
         textAlign: "center",

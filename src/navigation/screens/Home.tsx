@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, FlatList, TouchableOpacity, ListRenderItemInfo } from "react-native";
+import { View, FlatList, TouchableOpacity, ListRenderItemInfo, ScrollView } from "react-native";
 import { makeStyles, Text, useTheme } from "@rneui/themed";
 import { Icon } from "@rneui/base";
 import { useNavigation } from "@react-navigation/native";
@@ -65,21 +65,22 @@ export default function Home() {
     }
 
     return (
-        <View style={styles.container}>
-            <FlatList
-                data={botoes}
-                renderItem={renderItem}
-                numColumns={buttonColumns}
-                keyExtractor={(item) => item.id}
-            />
-        </View>
+        <ScrollView style={{ flex: 1 }}>
+            <View style={styles.container}>
+                <FlatList
+                    data={botoes}
+                    renderItem={renderItem}
+                    numColumns={buttonColumns}
+                    keyExtractor={(item) => item.id}
+                />
+            </View>
+        </ScrollView>
     )
 };
 
 const useStyles = makeStyles((theme) => ({
     container: {
         flex: 1,
-        padding: 0,
         margin: theme.spacing.lg,
     },
     button: {

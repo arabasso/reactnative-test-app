@@ -3,7 +3,7 @@ import { createTheme, ThemeMode, ThemeProvider } from "@rneui/themed";
 import { useCallback, useEffect, useState } from 'react';
 import { useColorScheme, View } from "react-native";
 import * as SplashScreen from 'expo-splash-screen';
-import Entypo from '@expo/vector-icons/Entypo';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import * as Font from 'expo-font';
 import * as Yup from 'yup';
 import { pt } from "yup-locale-pt";
@@ -23,7 +23,7 @@ export default function App() {
 
   async function onLoad() {
     try {
-      await Font.loadAsync(Entypo.font);
+      await Font.loadAsync(FontAwesome5.font);
 
       theme.mode = await storageService.getItem<ThemeMode>("theme.mode") || defaultMode;
     } catch (e) {
@@ -72,7 +72,7 @@ const theme = createTheme({
   components: {
     Text: (props, theme) => ({
       style: {
-        marginBottom: theme.spacing.lg,
+        marginBottom: theme.spacing.md,
       }
     }),
     Input: (props, theme) => ({

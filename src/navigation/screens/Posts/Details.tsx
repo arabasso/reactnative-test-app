@@ -31,13 +31,15 @@ export default function PostsDetails() {
     if (isLoading) return (<Loading isLoading={isLoading} />);
 
     return (
-        <ScrollView style={styles.container}>
-            <Text h4>{post.title}</Text>
-            <Text style={styles.userText}>{user.firstName} {user.lastName}</Text>
-            <View style={styles.tags}>
-                {post.tags.map((m, i) => <Badge key={i} badgeStyle={styles.tag} value={m} />)}
+        <ScrollView style={{ flex: 1 }}>
+            <View style={styles.container}>
+                <Text h4>{post.title}</Text>
+                <Text style={styles.userText}>{user.firstName} {user.lastName}</Text>
+                <View style={styles.tags}>
+                    {post.tags.map((m, i) => <Badge key={i} badgeStyle={styles.tag} value={m} />)}
+                </View>
+                <Text style={styles.paragraph}>{post.body}</Text>
             </View>
-            <Text style={styles.paragraph}>{post.body}</Text>
         </ScrollView>
     );
 }

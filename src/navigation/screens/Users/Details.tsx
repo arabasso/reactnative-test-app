@@ -29,47 +29,25 @@ export default function UsersDetails() {
     if (isLoading) return (<Loading isLoading={isLoading} />);
 
     return (
-        <ScrollView style={styles.container}>
-            <View style={styles.title}>
-                {user.image && (
-                    <Image source={{ uri: user.image }} style={{ width: 40, height: 40, marginRight: 10 }} />
-                )}
-                <View>
-                    <Text h4 style={{ color: theme.colors.black }}>{user.firstName} {user.lastName}</Text>
+        <ScrollView style={{ flex: 1 }}>
+            <View style={styles.container}>
+                <View style={styles.title}>
+                    {user.image && (
+                        <Image source={{ uri: user.image }} style={{ width: 40, height: 40, marginRight: 10 }} />
+                    )}
+                    <View>
+                        <Text h4 style={{ color: theme.colors.black }}>{user.firstName} {user.lastName}</Text>
+                    </View>
                 </View>
+                <Text><Text style={styles.label}>Login: </Text> {user.username}</Text>
+                <Text><Text style={styles.label}>Senha: </Text> {user.password}</Text>
+                <Text><Text style={styles.label}>Idade: </Text> {user.age}</Text>
+                <Text><Text style={styles.label}>Altura: </Text> {user.height} cm</Text>
+                <Text><Text style={styles.label}>Peso: </Text> {user.weight} KG</Text>
+                <Text><Text style={styles.label}>Sexo: </Text> {user.gender}</Text>
+                <Text><Text style={styles.label}>E-mail: </Text> {user.email}</Text>
+                <Text><Text style={styles.label}>Telefone: </Text> {user.phone}</Text>
             </View>
-            <Text>
-                <Text style={styles.label}>Login: </Text>
-                {user.username}
-            </Text>
-            <Text>
-                <Text style={styles.label}>Senha: </Text>
-                {user.password}
-            </Text>
-            <Text>
-                <Text style={styles.label}>Idade: </Text>
-                {user.age}
-            </Text>
-            <Text>
-                <Text style={styles.label}>Altura: </Text>
-                {user.height} cm
-            </Text>
-            <Text>
-                <Text style={styles.label}>Peso: </Text>
-                {user.weight} KG
-            </Text>
-            <Text>
-                <Text style={styles.label}>Sexo: </Text>
-                {user.gender}
-            </Text>
-            <Text>
-                <Text style={styles.label}>E-mail: </Text>
-                {user.email}
-            </Text>
-            <Text>
-                <Text style={styles.label}>Telefone: </Text>
-                {user.phone}
-            </Text>
         </ScrollView>
     );
 }

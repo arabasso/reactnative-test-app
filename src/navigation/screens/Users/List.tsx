@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FlatList, ListRenderItemInfo, TouchableOpacity, View, Image } from "react-native";
+import { FlatList, ListRenderItemInfo, TouchableOpacity, View, Image, ScrollView } from "react-native";
 import { makeStyles, Text, useTheme } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 
@@ -54,17 +54,19 @@ export default function UsersList() {
     }
 
     return (
-        <View style={styles.container}>
-            <FlatList
-                contentContainerStyle={{ padding: theme.spacing.lg }}
-                data={users}
-                renderItem={renderItem}
-                ListFooterComponent={<Loading isLoading={hasMoreData} />}
-                onEndReached={getPosts}
-                onEndReachedThreshold={0.1}
-                keyExtractor={(item) => item.id}
-            />
-        </View>
+        <ScrollView style={{ flex: 1 }}>
+            <View style={styles.container}>
+                <FlatList
+                    contentContainerStyle={{ padding: theme.spacing.lg }}
+                    data={users}
+                    renderItem={renderItem}
+                    ListFooterComponent={<Loading isLoading={hasMoreData} />}
+                    onEndReached={getPosts}
+                    onEndReachedThreshold={0.1}
+                    keyExtractor={(item) => item.id}
+                />
+            </View>
+        </ScrollView>
     )
 };
 
