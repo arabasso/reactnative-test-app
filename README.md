@@ -12,51 +12,52 @@ Este é um exemplo de aplicação completa, com suporte temas e controles custom
 - SecureStore
 - Axios
 
-### Debugando
-
-Basta baixar o repositório e executar no Expo Go (não é necessário baixar o Android Studio ou o XCode para executar pelo smartphone):
+### Clonando e Instalando
 
 ```shell
 git clone https://github.com/arabasso/reactnative-test-app.git
 cd reactnative-test-app
 npm install
+```
+
+### Debugando
+
+Basta executar no Expo Go (não é necessário baixar o Android Studio ou o XCode para executar pelo smartphone):
+
+```shell
 npx expo start
+```
+
+#### Android (Smartphone ou Emulador)
+
+Precisa do SDK do Android para executar:
+
+```shell
+npx expo start --android
+```
+
+#### iOS (Smartphone ou Emulador)
+
+Precisa do SDK do iPhone para executar:
+
+```shell
+npx expo start --ios
 ```
 
 ### Compilando
 
-#### Windows (Apenas Android)
+É necessário gerar o prebuild para poder compilar:
+
+```shell
+npx expo prebuild
+```
+
+#### Android (Windows, Linux e macOS)
 ```bat
-git clone https://github.com/arabasso/reactnative-test-app.git
-cd reactnative-test-app
-npm install
-npx expo prebuild
 npx expo run:android --variant release
 ```
 
-#### Linux (Apenas Android)
-```bash
-git clone https://github.com/arabasso/reactnative-test-app.git
-cd reactnative-test-app
-npm install
-npx expo prebuild
-npx expo run:android --variant release
-```
-
-#### macOS (Android)
+#### iOS (macOS)
 ```zsh
-git clone https://github.com/arabasso/reactnative-test-app.git
-cd reactnative-test-app
-npm install
-npx expo prebuild
-npx expo run:android --variant release
-```
-
-#### macOS (iOS)
-```zsh
-git clone https://github.com/arabasso/reactnative-test-app.git
-cd reactnative-test-app
-npm install
-npx expo prebuild
 npx expo run:ios --configuration Release
 ```
