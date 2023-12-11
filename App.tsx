@@ -1,33 +1,54 @@
 import 'react-native-gesture-handler';
 import { createTheme, ThemeMode, ThemeProvider } from "@rneui/themed";
-import { useColorScheme } from "react-native";
+import { useCallback, useEffect, useState } from 'react';
+import { useColorScheme, View } from "react-native";
+import * as SplashScreen from 'expo-splash-screen';
+import Entypo from '@expo/vector-icons/Entypo';
+import * as Font from 'expo-font';
 import * as Yup from 'yup';
 import { pt } from "yup-locale-pt";
 
 import Routes from '@navigation/routes';
-import { useEffect, useState } from 'react';
 import { useStorage } from '@hooks/Storage';
 
 Yup.setLocale(pt);
 
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
   const { storageService } = useStorage();
-
-  const [ isLoading, setIsLoading ] = useState(true);
-  
   const defaultMode = useColorScheme() as ThemeMode;
-  useEffect(() => {
-    storageService.getItem<ThemeMode>("theme.mode").then(mode => {
-      theme.mode = mode || defaultMode;
-  
-      setIsLoading(false);
-    })
-  }, []);
 
-  return !isLoading && (
-    <ThemeProvider theme={theme}>
-      <Routes />
-    </ThemeProvider>
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  async function onLoad() {
+    try {
+      await Font.loadAsync(Entypo.font);
+
+      theme.mode = await storageService.getItem<ThemeMode>("theme.mode") || defaultMode;
+    } catch (e) {
+      console.warn(e);
+    } finally {
+      setAppIsReady(true);
+    }
+  }
+
+  useEffect(() => { onLoad(); }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  return appIsReady && (
+    <View
+      style={{ flex: 1 }}
+      onLayout={onLayoutRootView}>
+      <ThemeProvider theme={theme} >
+        <Routes />
+      </ThemeProvider>
+    </View>
   );
 }
 
