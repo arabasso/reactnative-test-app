@@ -18,7 +18,7 @@ export default function UsersList() {
     const [hasMoreData, setHasMoreData] = useState(true);
     const [page, setPage] = useState(1);
     const [users, setUsers] = useState<User[]>([]);
-    async function getPosts() {
+    async function getUsers() {
         if (!hasMoreData) return;
 
         const skip = itemsPerPage * (page - 1);
@@ -60,7 +60,7 @@ export default function UsersList() {
                 data={users}
                 renderItem={renderItem}
                 ListFooterComponent={<Loading isLoading={hasMoreData} />}
-                onEndReached={getPosts}
+                onEndReached={getUsers}
                 onEndReachedThreshold={0.1}
                 keyExtractor={(item) => item.id}
             />

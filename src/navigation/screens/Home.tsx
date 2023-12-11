@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { View, FlatList, TouchableOpacity, ListRenderItemInfo, ScrollView } from "react-native";
 import { makeStyles, Text, useTheme } from "@rneui/themed";
 import { Icon } from "@rneui/base";
@@ -23,7 +23,7 @@ export default function Home() {
 
     const [botoes, setBotoes] = useState<HomeButton[]>([]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         async function onLoad() {
             let items = [
                 {
