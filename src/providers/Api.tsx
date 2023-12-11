@@ -1,10 +1,12 @@
-import { AuthContext } from "@contexts/Auth";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 import { ApiContext } from "@contexts/Api";
+import { useAuth } from "@hooks/Auth";
 import { AuthService } from "@services/Auth";
 import { PostService } from "@services/Post";
 import { UserService } from "@services/User";
-import axios from "axios";
-import { useState, useContext, useEffect } from "react";
+import { useStorage } from "@hooks/Storage";
 
 const baseUrl = "https://dummyjson.com/";
 
@@ -14,7 +16,8 @@ export function ApiProvider({ children }: any) {
     const [userService] = useState(new UserService(axios.create({ baseURL: baseUrl })));
     const [bearerUserService, setBearerUserService] = useState<UserService>();
 
-    const { login } = useContext(AuthContext);
+    const { login, setLogin } = useAuth();
+    const { secureStorageService } = useStorage();
 
     useEffect(() => {
         const axiosInstance = axios.create({ baseURL: "https://dummyjson.com/auth" });
@@ -34,6 +37,8 @@ export function ApiProvider({ children }: any) {
                 originalRequest._retry = true;
 
                 login!.token = await authService.refreshToken(login!);
+
+                secureStorageService.setItem("auth.login", login);
 
                 return axiosInstance(originalRequest);
             }
