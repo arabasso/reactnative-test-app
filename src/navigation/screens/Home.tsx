@@ -22,32 +22,35 @@ export default function Home() {
     const { isLogged } = useAuth();
 
     const [botoes, setBotoes] = useState<HomeButton[]>([]);
-    async function getBotoes() {
-        let items = [
-            {
-                id: 1,
-                requiresLogin: false,
-                icon: <Icon type="font-awesome-5" solid name="edit" style={{ marginBottom: 10 }} color={theme.colors.foreground} />,
-                text: "Publicações",
-                navigateTo: () => navigation.navigate("PostsList")
-            },
-            {
-                id: 2,
-                requiresLogin: true,
-                icon: <Icon type="font-awesome-5" solid name="user" style={{ marginBottom: 10 }} color={theme.colors.foreground} />,
-                text: "Usuários",
-                navigateTo: () => navigation.navigate("UsersList")
-            },
-        ];
 
-        while (items.length % buttonColumns != 0) {
-            items.push({} as HomeButton);
+    useEffect(() => {
+        async function onLoad() {
+            let items = [
+                {
+                    id: 1,
+                    requiresLogin: false,
+                    icon: <Icon type="font-awesome-5" solid name="edit" style={{ marginBottom: 10 }} color={theme.colors.foreground} />,
+                    text: "Publicações",
+                    navigateTo: () => navigation.navigate("PostsList")
+                },
+                {
+                    id: 2,
+                    requiresLogin: true,
+                    icon: <Icon type="font-awesome-5" solid name="user" style={{ marginBottom: 10 }} color={theme.colors.foreground} />,
+                    text: "Usuários",
+                    navigateTo: () => navigation.navigate("UsersList")
+                },
+            ];
+
+            while (items.length % buttonColumns != 0) {
+                items.push({} as HomeButton);
+            }
+
+            setBotoes(items);
         }
 
-        setBotoes(items);
-    }
-
-    useEffect(() => { getBotoes() }, []);
+        onLoad();
+    }, []);
 
     function renderItem({ item }: ListRenderItemInfo<HomeButton>) {
         return (
@@ -65,16 +68,14 @@ export default function Home() {
     }
 
     return (
-        <ScrollView style={{ flex: 1 }}>
-            <View style={styles.container}>
-                <FlatList
-                    data={botoes}
-                    renderItem={renderItem}
-                    numColumns={buttonColumns}
-                    keyExtractor={(item) => item.id}
-                />
-            </View>
-        </ScrollView>
+        <View style={styles.container}>
+            <FlatList
+                data={botoes}
+                renderItem={renderItem}
+                numColumns={buttonColumns}
+                keyExtractor={(item) => item.id}
+            />
+        </View>
     )
 };
 

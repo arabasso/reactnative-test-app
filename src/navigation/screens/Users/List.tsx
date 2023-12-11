@@ -54,19 +54,17 @@ export default function UsersList() {
     }
 
     return (
-        <ScrollView style={{ flex: 1 }}>
-            <View style={styles.container}>
-                <FlatList
-                    contentContainerStyle={{ padding: theme.spacing.lg }}
-                    data={users}
-                    renderItem={renderItem}
-                    ListFooterComponent={<Loading isLoading={hasMoreData} />}
-                    onEndReached={getPosts}
-                    onEndReachedThreshold={0.1}
-                    keyExtractor={(item) => item.id}
-                />
-            </View>
-        </ScrollView>
+        <View style={styles.container}>
+            <FlatList
+                contentContainerStyle={{ padding: theme.spacing.lg }}
+                data={users}
+                renderItem={renderItem}
+                ListFooterComponent={<Loading isLoading={hasMoreData} />}
+                onEndReached={getPosts}
+                onEndReachedThreshold={0.1}
+                keyExtractor={(item) => item.id}
+            />
+        </View>
     )
 };
 

@@ -91,7 +91,9 @@ function CustomDrawerContent(props: any) {
     const { isLogged, setLogin, login } = useAuth();
     const { storageService } = useStorage();
 
-    useEffect(() => { storageService.setItem("theme.mode", mode); }, [mode]);
+    useEffect(() => {
+        storageService.setItem("theme.mode", mode);
+    }, [mode]);
 
     function switchTheme() {
         const mode = theme.mode === "dark" ? "light" : "dark";

@@ -17,14 +17,17 @@ export default function UsersDetails() {
 
     const [isLoading, setIsLoading] = useState(true);
     const [user, setUser] = useState<User>({} as User);
-    async function getPost() {
-        const user = await bearerUserService!.get(id);
 
-        setUser(user);
-        setIsLoading(false);
-    }
+    useEffect(() => {
+        async function onLoad() {
+            const user = await bearerUserService!.get(id);
 
-    useEffect(() => { getPost(); }, []);
+            setUser(user);
+            setIsLoading(false);
+        }
+
+        onLoad();
+    }, []);
 
     if (isLoading) return (<Loading isLoading={isLoading} />);
 

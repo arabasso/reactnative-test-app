@@ -21,19 +21,21 @@ export default function App() {
 
   const [appIsReady, setAppIsReady] = useState(false);
 
-  async function onLoad() {
-    try {
-      await Font.loadAsync(FontAwesome5.font);
+  useEffect(() => {
+    async function onLoad() {
+      try {
+        await Font.loadAsync(FontAwesome5.font);
 
-      theme.mode = await storageService.getItem<ThemeMode>("theme.mode") || defaultMode;
-    } catch (e) {
-      console.warn(e);
-    } finally {
-      setAppIsReady(true);
+        theme.mode = await storageService.getItem<ThemeMode>("theme.mode") || defaultMode;
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
     }
-  }
 
-  useEffect(() => { onLoad(); }, []);
+    onLoad();
+  }, []);
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {

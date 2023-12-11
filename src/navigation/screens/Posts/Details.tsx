@@ -17,16 +17,19 @@ export default function PostsDetails() {
     const [isLoading, setIsLoading] = useState(true);
     const [post, setPost] = useState<Post>({} as Post);
     const [user, setUser] = useState<User>({} as User);
-    async function getPost() {
-        const post = await postService.get(id);
-        const user = await userService.get(post.userId);
 
-        setUser(user);
-        setPost(post);
-        setIsLoading(false);
-    }
+    useEffect(() => {
+        async function onLoad() {
+            const post = await postService.get(id);
+            const user = await userService.get(post.userId);
+    
+            setUser(user);
+            setPost(post);
+            setIsLoading(false);
+        }
 
-    useEffect(() => { getPost(); }, []);
+        onLoad();
+    }, []);
 
     if (isLoading) return (<Loading isLoading={isLoading} />);
 
