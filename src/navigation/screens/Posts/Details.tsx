@@ -4,13 +4,13 @@ import { Badge, makeStyles, Text } from "@rneui/themed";
 import { useRoute } from "@react-navigation/native";
 
 import { Loading } from "@components/Loading";
-import { useBackend } from "@hooks/Backend";
+import { useApi } from "@hooks/Api";
 
 export default function PostsDetails() {
     const styles = useStyles();
     const route = useRoute();
 
-    const { postService, userService } = useBackend();
+    const { postService, userService } = useApi();
 
     const { id } = route.params as { id: number };
 

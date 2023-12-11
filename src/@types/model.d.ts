@@ -8,6 +8,7 @@ export declare global {
     type Login = {
         id: number;
         username: string;
+        password: string;
         email: string;
         firstName: string;
         lastName: string;

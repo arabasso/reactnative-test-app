@@ -1,13 +1,13 @@
-import { BackendService } from "./Backend";
+import { AxiosInstance } from "axios";
 
 export class PostService {
-    constructor(private backend: BackendService) { }
+    constructor(private axiosInstance: AxiosInstance) { }
 
     public async get(id: number): Promise<Post> {
-        return await this.backend.getJson<Post>("posts/" + id);
+        return await this.axiosInstance<Post>({ method: "GET", url: "/posts/" + id }).then(response => response.data);
     }
 
     public async list(skip: number, limit: number): Promise<PostResult> {
-        return await this.backend.getJson<PostResult>(`posts?skip=${skip}&limit=${limit}`);
+        return await this.axiosInstance<PostResult>({ method: "GET", url: "/posts", params: { skip: skip, limit: limit } }).then(response => response.data);
     }
 }

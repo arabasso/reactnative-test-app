@@ -7,7 +7,7 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import * as yup from "yup";
 
 import { useAuth } from "@hooks/Auth";
-import { useBackend } from "@hooks/Backend";
+import { useApi } from "@hooks/Api";
 
 import InputControl from "@components/InputControl";
 
@@ -21,7 +21,7 @@ export default function Login() {
     const navigation = useNavigation();
 
     const { setLogin } = useAuth();
-    const { authService } = useBackend();
+    const { authService } = useApi();
 
     const [isLoading, setIsLoading] = useState(false);
 

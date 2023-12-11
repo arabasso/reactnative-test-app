@@ -1,17 +1,25 @@
-import { BackendService } from "./Backend";
+import { AxiosInstance } from 'axios';
 
 export class AuthService {
-  constructor(private backendService: BackendService) {}
+  private static expiresInMins = 3;
+
+  constructor(private instance: AxiosInstance) { }
 
   public async login(username: string, password: string): Promise<Login> {
-    const init = {
-      body: JSON.stringify({
+    return await this.instance<Login>({
+      method: "post",
+      url: "/auth/login",
+      data: {
         username: username,
         password: password,
-        // expiresInMins: 60, // optional
-      }),
-    };
+        expiresInMins: AuthService.expiresInMins,
+      },
+    }).then(response => {
+      return { ...response.data, password: password };
+    })
+  }
 
-    return await this.backendService.postJson<Login>("auth/login", init);
+  public async refreshToken(login: Login): Promise<string> {
+    return await this.login(login.username, login.password).then(response => response.token);
   }
 }

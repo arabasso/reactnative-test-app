@@ -4,7 +4,7 @@ import { StatusBar, SafeAreaView, View, Image } from "react-native";
 import { Text, makeStyles, useTheme } from "@rneui/themed";
 
 import { AuthProvider } from "@providers/Auth";
-import { BackendProvider } from "@providers/Backend";
+import { ApiProvider } from "@providers/Api";
 
 import DrawerRoutes from "./drawer.routes";
 
@@ -34,9 +34,9 @@ export default function Routes() {
                             </View>
                             <DrawerToggleButton tintColor={theme.colors.foreground} />
                         </View>
-                        <BackendProvider>
+                        <ApiProvider>
                             <DrawerRoutes />
-                        </BackendProvider>
+                        </ApiProvider>
                     </NavigationContainer>
                 </View>
             </SafeAreaView>

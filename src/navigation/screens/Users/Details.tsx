@@ -4,14 +4,14 @@ import { makeStyles, Text, useTheme } from "@rneui/themed";
 import { useRoute } from "@react-navigation/native";
 
 import { Loading } from "@components/Loading";
-import { useBackend } from "@hooks/Backend";
+import { useApi } from "@hooks/Api";
 
 export default function UsersDetails() {
     const styles = useStyles();
     const { theme } = useTheme();
     const route = useRoute();
 
-    const { bearerUserService } = useBackend();
+    const { bearerUserService } = useApi();
 
     const { id } = route.params as { id: number };
 

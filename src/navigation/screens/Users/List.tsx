@@ -4,7 +4,7 @@ import { makeStyles, Text, useTheme } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 
 import { Loading } from "@components/Loading";
-import { useBackend } from "@hooks/Backend";
+import { useApi } from "@hooks/Api";
 
 const itemsPerPage = 15;
 
@@ -13,7 +13,7 @@ export default function UsersList() {
     const styles = useStyles();
     const navigation = useNavigation();
 
-    const { bearerUserService } = useBackend();
+    const { bearerUserService } = useApi();
 
     const [hasMoreData, setHasMoreData] = useState(true);
     const [page, setPage] = useState(1);
