@@ -6,7 +6,7 @@ Este é um exemplo de aplicação completa, com suporte temas e controles custom
 
 ![Screenshot](./screenshot.gif)
 
-### Bibliotecas incluídas:
+### Bibliotecas
 - React Navigation (Stack e Drawer)
 - AsyncStorage
 - SecureStore
@@ -14,7 +14,7 @@ Este é um exemplo de aplicação completa, com suporte temas e controles custom
 
 ### Debugando
 
-Basta baixar o repositório e executar no Expo Go (não é necessário baixar o Android Studio ou o XCode para executar pelo smartphone com o Expo Go):
+Basta baixar o repositório e executar no Expo Go (não é necessário baixar o Android Studio ou o XCode para executar pelo smartphone):
 
 ```shell
 git clone https://github.com/arabasso/reactnative-test-app.git
