@@ -59,5 +59,5 @@ npx expo run:android --variant release
 
 #### iOS (macOS)
 ```zsh
-npx expo run:ios --configuration Release
+npx expo run:ios --configuration Release --device
 ```
