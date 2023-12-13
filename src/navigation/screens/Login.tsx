@@ -11,11 +11,6 @@ import { useApi } from "@hooks/Api";
 
 import InputControl from "@components/InputControl";
 
-type FormDataProps = {
-    username: string;
-    password: string;
-};
-
 export default function Login() {
     const styles = useStyles();
     const navigation = useNavigation();
@@ -26,12 +21,11 @@ export default function Login() {
     const [isLoading, setIsLoading] = useState(false);
 
     const validationSchema = yup.object({
-        root: yup.string(),
         username: yup.string().required().label("Usuário"),
         password: yup.string().required().min(3).label("Senha"),
     });
 
-    const { control, handleSubmit, formState: { errors }, reset } = useForm<FormDataProps>({ resolver: yupResolver(validationSchema), defaultValues: { username: "", password: "" } })
+    const { control, handleSubmit, formState: { errors }, reset } = useForm({ resolver: yupResolver(validationSchema), defaultValues: { username: "", password: "" } })
 
     async function onSubmit(data: any) {
         setIsLoading(true);
