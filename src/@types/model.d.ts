@@ -14,7 +14,8 @@ export declare global {
         lastName: string;
         gender: male;
         image: Uri | string;
-        token: string;
+        accessToken: string;
+        refreshToken: string;
     }
     
     type Post = {

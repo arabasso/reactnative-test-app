@@ -23,7 +23,7 @@ export function ApiProvider({ children }: any) {
         const axiosInstance = axios.create({ baseURL: "https://dummyjson.com/auth" });
 
         axiosInstance.interceptors.request.use(async config => {
-            config.headers.setAuthorization("Bearer " + login?.token, true);
+            config.headers.setAuthorization("Bearer " + login?.accessToken, true);
 
             return config;
         }, function (error) {
@@ -36,7 +36,7 @@ export function ApiProvider({ children }: any) {
             if (error.response.status === 401 && !originalRequest._retry) {
                 originalRequest._retry = true;
 
-                login!.token = await authService.refreshToken(login!);
+                login!.accessToken = await authService.refreshToken(login!);
 
                 secureStorageService.setItem("auth.login", login);
 

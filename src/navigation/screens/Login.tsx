@@ -44,7 +44,7 @@ export default function Login() {
     };
 
     function onFocus() {
-        reset({ username: "atuny0", password: "9uQFF1Lh" });
+        reset({ username: "emilys", password: "emilyspass" });
     }
 
     useFocusEffect(useCallback(onFocus, []));

@@ -20,6 +20,6 @@ export class AuthService {
   }
 
   public async refreshToken(login: Login): Promise<string> {
-    return await this.login(login.username, login.password).then(response => response.token);
+    return await this.login(login.username, login.password).then(response => response.accessToken);
   }
 }
